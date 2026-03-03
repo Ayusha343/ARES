@@ -1,0 +1,2 @@
+device id: 32eb54c8-ac0d-4fd8-8935-30d793fda57d
+secret key: 5DS7WJEK4YEGGJ6DU4US
