@@ -1,0 +1,43 @@
+﻿Gy 521 
+https://electrosome.com/interfacing-mpu-6050-gy-521-arduino-uno/
+
+https://mschoeffler.com/2017/10/05/tutorial-how-to-use-the-gy-521-module-mpu-6050-breakout-board-with-the-arduino-uno/
+
+https://youtu.be/oYaShsgHRoM?si=30YuyF0dIesSZoBf
+
+https://youtu.be/uhh7ik02aDc?si=F8jt-1J2uKTywAAq
+
+
+GY 61 (adxl335)
+https://www.electronicwings.com/sensors-modules/adxl335-accelerometer-module
+
+https://lastminuteengineers.com/adxl335-accelerometer-arduino-tutorial/
+
+
+Gsm
+https://lastminuteengineers.com/sim800l-gsm-module-arduino-tutorial/
+
+
+Gps
+https://lastminuteengineers.com/neo6m-gps-arduino-tutorial/
+
+
+RFID
+https://circuitdigest.com/microcontroller-projects/interfacing-rfid-reader-module-with-arduino
+https://lastminuteengineers.com/how-rfid-works-rc522-arduino-tutorial/
+
+
+MAX30102
+https://lastminuteengineers.com/max30102-pulse-oximeter-heart-rate-sensor-arduino-tutorial/
+
+
+LM 35
+https://lastminuteengineers.com/lm35-temperature-sensor-arduino-tutorial/
+
+gsm time
+https://www.youtube.com/watch?v=UriCOG7uLs4&ab_channel=RaviPujar
+
+
+forum:
+https://www.team-bhp.com/forum/road-safety/144117-cattle-real-menace-indian-highways-6.html
+

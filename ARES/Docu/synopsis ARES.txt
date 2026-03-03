@@ -1,0 +1,32 @@
+Title: Animals on Roads - Enhancement of Safety (ARES)
+
+Synopsis:
+Stray animals pose a significant threat to road safety and animal welfare in India, with motor vehicle accidents causing injuries and fatalities to both humans and animals. This project proposes a comprehensive approach to enhance animal protection on Indian roads. The approach involves two main components: the utilization of nylon belts with fluorescence for
+improved animal visibility during night-time and the integration of a sensor system that detects accidents and communicates with veterinary services. Through the implementation of these innovative measures, the project aims to reduce accidents involving animals and promote the well-being of both animals and humans.
+
+Problem statement:
+Statistics from major Indian cities indicate that cows alone account for 28.4% of road accidents involving stray animals. India's roads are plagued by the presence of over 5 million stray cattle, contributing to road accidents and posing risks to both human safety and agricultural productivity. This project addresses the urgent need for animals protection by introducing a holistic strategy that leverages technology and innovative solutions. Motor vehicle accidents involving stray cattle are a pressing concern, particularly on National Highways (NHs). Statistics from major Indian cities indicate that cows alone account for 28.4% of road accidents involving stray animals. In addition to this problem, nearly 60 million pets are homeless or missing and are living in the streets while their owners search for them. With today's hectic schedule, keeping track of health of animals is very difficult resulting in their illness.
+
+Solution:
+
+To mitigate this issue, this project proposes the integration of nylon belts with fluorescence. These belts serve a dual purpose – enhancing the visibility of animals to drivers, especially in low-light conditions, and ensuring the comfort and well-being of the animals. This novel approach not only reduces the chances of accidents but also minimizes the stress and discomfort caused by conventional restraint methods. To further enhance the safety of animals, a sensor system is recommended. This system employs accelerometers, gyroscopes, and GPS technology to detect sudden changes in the animals' movements that could be indicative of accidents. Upon detecting such events, the sensor system promptly alerts nearby veterinary services, providing them with the animal's location for swift medical intervention. This proactive approach not only aids in reducing suffering but also contributes to the efficiency of emergency response. This device can also detect any abnormality in the animal's health though various sensors monitoring vitals like BPM, SPO2 levels and Temperature. The primary objective of this project is to quantify the reduction in motor vehicle accidents involving animals on roads, thereby measuring the efficacy of the proposed safety measures. Additionally, the project aims to evaluate the efficiency of the sensor system in detecting and communicating health-related incidents to veterinary services. This device also aims to keep track of the pet animals and inform the owner when they exceed certain area marked by the user.
+
+Future Development:
+The successful implementation of this project could pave the way for broader
+applications and improvements in cattle protection on Indian roads. Future
+developments may include:
+● The accelerometer and gps can be made into implants done
+● This will reduce the bulk on the cow and further help it in free movement
+● The electronics being inside the cow will mean that there is no chance of
+it getting thrown off due to rapid movement
+● Battery efficiency can be improved
+● More data will make the AI more accurate
+
+Scalability: 
+If proven effective, the use of nylon belts with fluorescence and sensor systems could be extended to other regions with similar challenges.If proven effective, the use of nylon belts with fluorescence and sensor systems could be extended to other regions with similar challenges. We have both B2Band B2C approach, as we plan to sell this device to individual cattle owners, farm owners and businesses like FPOs, co-operatives like AMUL and governments (municipal corporations).The price will be set such that it will be feasible for all customers and device will be sold on a subscription / lease-based model also. For example: a customer can buy the device completely or take it on lease and use the device. When his cattle will die, he could be able to return the product and get some amount of refund. For pet owners we could sell them through e-Commerce or directly into offline market. The same device can be used on various animals by choosing the suitable mode in the app. In terms of production, this can be assembled locally by importing electronical components from cheaper markets like China and Taiwan and making the body with injection molding, with locally sourced materials. Initially, test batches can be order in bulk of few hundreds to give the startup some boost and profit for further investments.
+
+Technological Advancements: 
+As technology continues to evolve, more sophisticated sensors and communication methods could be integrated to enhance accuracy and responsiveness.
+
+Public Awareness: 
+Raising awareness among drivers and the general public about the presence of cattle on roads and the importance of safe driving practices could further prevent accidents.

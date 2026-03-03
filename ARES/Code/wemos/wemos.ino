@@ -1,0 +1,66 @@
+#include <ESP8266WiFi.h>
+
+#define WIFI_SSID "Dr Ranjan Sahoo"
+#define WIFI_PASS "Dr Ranjan 1181"
+
+int xPin = A0;
+int x = 0;
+int x2 = 0;
+int y = 0;
+int ded = 0;
+int l1 = D0;
+int sampul = 50;
+
+void setup()
+{
+  pinMode(l1,OUTPUT);
+  pinMode(xPin,INPUT);
+  Serial.begin(115200);
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  Serial.println(WiFi.localIP());
+}
+
+void loop()
+{
+    while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(100);
+    Serial.print(".");
+  }
+
+  for(int i=0;i<sampul;i++)
+  {
+    x += analogRead(xPin);
+  }
+  x /= sampul;
+  Serial.print("x: ");
+  Serial.println(x);
+
+  for(int i=0;i<sampul;i++)
+  {
+    x2 += analogRead(xPin);
+  }
+  x2 /= sampul;
+  y = x2-x;
+  Serial.println(y);
+  
+  if ((y>=2) || (y<=-2))
+  {
+    ded = 1;
+    float acc = random(10,15);
+    Serial.println(acc);
+  }
+  else
+  {
+    ded = 0;
+  } 
+  if (ded == 1)
+  {
+    digitalWrite(l1,1);
+  }
+  else
+  {
+    digitalWrite(l1,0);
+  }
+  delay(300);
+}

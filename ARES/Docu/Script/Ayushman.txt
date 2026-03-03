@@ -1,0 +1,37 @@
+we try to overcome this problem with our soultion:
+
+We provide a sensor based monitoring system along with high visiblity strip and LEDs to make the cow visible in the dark. It has features like live location tracking, cattle identification system and vitals monitoring systems.
+
+we can broadly divide its functioning into 3 cases.
+Case 1:
+There is no rider, cow is just existing somewhere. The sensors will collect its vitals like heart rate, oxygen level and temperature. Then this data will be sent to the database, along with its live location every 5 mins. We can use location data to combine it with Google Maps for crowd mapping. If any abnormalities are detected in its vitals, authorities will be informed.
+
+
+
+
+
+
+
+
+
+
+Case 3:
+In the third case, like in NH scenario, the collison is inevitable. The accelerameter and the gyroscope will detect the collison and inform about it to the authorities. It will send the live vitals and location of collision. Just in the case when the cattle manages to move to different location, it will also send live location.
+
+Now comes the question of why one should spend so much money on a single animal?
+
+Lives of both human and cows are at risk. Cows are considered sacred in India. Death of such auspicious being causes social unrest. Overall a single collision can cost upto 1 Cr. You can look at the flow chart to see the cost addition.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introducing CARES: a groundbreaking solution to prevent accidents involving stray cattle. Our sensor-based system not only ensures high visibility at night but also monitors the health of the cattle in real-time. It's a comprehensive approach to road safety, safeguarding lives and promoting animal welfare. Thank you for your attention.
